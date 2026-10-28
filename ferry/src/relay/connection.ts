@@ -133,9 +133,21 @@ export class Connection {
     this.set({ kind: 'unpaired' })
   }
 
-  /** The app came back to the foreground (or the user tapped Retry). */
+  /** The app came back to the foreground (or the user tapped Retry). A link that still looks live is
+   *  probed: iOS can freeze a socket without closing it, and a half-open link would otherwise sit on
+   *  15 s request timeouts. */
   resume(): void {
     if (!this.pairing) return
+    if (this.state.kind === 'live' && this.rpc) {
+      const gen = this.generation
+      this.rpc.request('host.info', {}, 4000).catch(() => {
+        if (gen === this.generation) {
+          this.attempt = 0
+          void this.connect()
+        }
+      })
+      return
+    }
     if (this.state.kind === 'offline' || this.state.kind === 'denied') {
       this.attempt = 0
       void this.connect()

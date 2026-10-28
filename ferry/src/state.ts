@@ -50,12 +50,17 @@ connection.subscribe((s) => {
   else schedule()
 })
 
+const SUSPEND_AFTER_MS = 20_000
+let suspendTimer: ReturnType<typeof setTimeout> | null = null
 document.addEventListener('visibilitychange', () => {
+  if (suspendTimer) clearTimeout(suspendTimer)
+  suspendTimer = null
   if (document.visibilityState === 'visible') {
     connection.resume()
+    void refreshProjects()
     schedule()
   } else {
-    connection.suspend()
+    suspendTimer = setTimeout(() => connection.suspend(), SUSPEND_AFTER_MS)
   }
 })
 
@@ -154,6 +159,7 @@ export function useRoute(): Route {
 export function ago(since: number | null, now = Date.now()): string {
   if (!since) return ''
   const m = Math.max(0, Math.round((now - since) / 60_000))
+  if (m < 1) return 'now'
   if (m < 60) return `${m}m`
   const h = Math.round(m / 60)
   return h < 48 ? `${h}h` : `${Math.round(h / 24)}d`

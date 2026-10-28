@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'preact/hooks'
 // The Rack: every project shelf with its slots; needs-you sessions push a tab out past the right edge.
 import { connection, ago, href, useLink, useSnapshot, type Route } from '../state'
 import { counts, type Session } from '../relay/projects'
@@ -67,9 +68,19 @@ export function TabBar({ on, needs }: { on: 'rack' | 'board' | 'mac'; needs: num
 
 /** One line under the header whenever the link is anything but live: state is never shown as current
  *  when it is not. */
+const QUIET_RECONNECT_MS = 3000
+
 export function LinkBanner() {
   const link = useLink()
+  const [slow, setSlow] = useState(false)
+  useEffect(() => {
+    setSlow(false)
+    if (link.kind !== 'connecting') return
+    const t = setTimeout(() => setSlow(true), QUIET_RECONNECT_MS)
+    return () => clearTimeout(t)
+  }, [link.kind])
   if (link.kind === 'live' || link.kind === 'loading') return null
+  if (link.kind === 'connecting' && !slow) return null
   const text =
     link.kind === 'connecting'
       ? link.step === 'token'
@@ -105,8 +116,10 @@ export function Rack({ route }: { route: Extract<Route, { name: 'rack' }> }) {
   const keep = (s: Session) => route.filter === 'all' || (route.filter === 'needs' ? s.state === 'needs' : s.state === 'working')
   const shelves = (snap?.shelves ?? []).map((sh) => ({ ...sh, sessions: sh.sessions.filter(keep) })).filter((sh) => sh.sessions.length)
   const sub =
-    link.kind !== 'live'
-      ? at ? `Last seen ${ago(at) || 'just now'} ago` : 'Not connected'
+    link.kind === 'connecting'
+      ? 'Reconnecting…'
+      : link.kind !== 'live'
+        ? at ? `Offline · updated ${ago(at) === 'now' ? 'just now' : `${ago(at)} ago`}` : 'Not connected'
       : `Live · ${c.all} session${c.all === 1 ? '' : 's'} in ${snap?.shelves.length ?? 0} projects`
 
   return (
