@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>Option B · The rack</title>
+<style>
+/*@include world.css*/
+/* Option B — the whole frame leads: every project shelf with its sessions, tabs on the right edge. */
+.filters { background: var(--frame); padding: 0 16px 12px; flex: none; }
+.filters .seg button span { font-variant-numeric: tabular-nums; opacity: .8; }
+.rack-scroll { flex: 1; padding-bottom: 22px; }
+.sess-head { flex-direction: column; align-items: stretch; gap: 10px; }
+.sess-head .line { display: flex; align-items: center; gap: 10px; }
+.mac-sheet { padding: 16px; display: grid; gap: 12px; align-content: start; }
+.facts { background: var(--slot); border-radius: 14px; box-shadow: var(--shadow); }
+.facts div { display: flex; justify-content: space-between; padding: 13px 14px; font-size: 14px; }
+.facts div + div { border-top: 1px solid var(--rule); }
+.facts dt { color: var(--ink-2); }
+.facts code { font: 400 12.5px/1.3 var(--code); }
+</style>
+</head>
+<body>
+<!--@status-->
+<div class="app" id="app"></div>
+<div class="synthetic">Option B · The rack · synthetic content</div>
+<script>
+//@include content.js
+const tabbar = (on) => `<nav class="tabbar">
+  <button data-go="home" data-nav aria-current="${on === 'home'}">${ico('rack')}Sessions<span class="count">${NEEDS.length}</span></button>
+  <button data-go="board" data-nav aria-current="${on === 'board'}">${ico('board')}Board</button>
+  <button data-go="mac" data-nav aria-current="${on === 'mac'}">${ico('mac')}Mac</button></nav>`
+
+const sessionHead = (mode) => `<div class="topbar sess-head">
+  <div class="line"><button class="icon-btn" data-go="home" data-back aria-label="Back">${ico('back')}</button>
+    <span class="plate lg">PAN·1</span><h1>Costco receipt parser<small>Claude · pantry · plan waiting</small></h1><button class="icon-btn" aria-label="More">${ico('more')}</button></div>
+  <div class="seg"><button data-go="chat" data-seg aria-pressed="${mode === 'chat'}">${ico('chat', 'sm')}Chat</button><button data-go="term" data-seg aria-pressed="${mode === 'term'}">${ico('term', 'sm')}Terminal</button></div></div>`
+
+const shelves = (filter) => PROJECTS.map((p) => {
+  const ss = p.sessions.filter(filter)
+  if (!ss.length) return ''
+  return `<div class="shelf"><h2>${p.name}</h2><span>${p.path}</span><span class="grow"></span><button class="more" data-go="board">Board</button></div>
+  <div class="slots">${ss.map((s) => row(s)).join('')}</div>`
+}).join('')
+
+document.getElementById('app').innerHTML = `
+<section class="screen" id="home">
+  <div class="topbar"><h1>${MAC.name}<small><span class="link-state"><i></i>Live · 10 sessions in 4 projects</span></small></h1>${THEME_BTN}</div>
+  <div class="filters"><div class="seg">
+    <button data-go="home" data-seg aria-pressed="true">All <span>10</span></button>
+    <button data-go="needs" data-seg aria-pressed="false">Need you <span>${NEEDS.length}</span></button>
+    <button data-go="working" data-seg aria-pressed="false">Working <span>3</span></button></div></div>
+  <div class="scroll rack-scroll">${shelves(() => true)}</div>${tabbar('home')}
+</section>
+<section class="screen" id="needs">
+  <div class="topbar"><h1>${MAC.name}<small><span class="link-state"><i></i>Live · 3 waiting on you</span></small></h1>${THEME_BTN}</div>
+  <div class="filters"><div class="seg">
+    <button data-go="home" data-seg aria-pressed="false">All <span>10</span></button>
+    <button data-go="needs" data-seg aria-pressed="true">Need you <span>${NEEDS.length}</span></button>
+    <button data-go="working" data-seg aria-pressed="false">Working <span>3</span></button></div></div>
+  <div class="scroll rack-scroll">${shelves((s) => s.state === 'needs')}</div>${tabbar('home')}
+</section>
+<section class="screen" id="working">
+  <div class="topbar"><h1>${MAC.name}<small><span class="link-state"><i></i>Live · 3 working</span></small></h1>${THEME_BTN}</div>
+  <div class="filters"><div class="seg">
+    <button data-go="home" data-seg aria-pressed="false">All <span>10</span></button>
+    <button data-go="needs" data-seg aria-pressed="false">Need you <span>${NEEDS.length}</span></button>
+    <button data-go="working" data-seg aria-pressed="true">Working <span>3</span></button></div></div>
+  <div class="scroll rack-scroll">${shelves((s) => s.state === 'working')}</div>${tabbar('home')}
+</section>
+<section class="screen" id="board">
+  <div class="topbar"><button class="icon-btn" data-go="home" data-back aria-label="Back">${ico('back')}</button><h1>pantry<small>Board · drag a card to move it</small></h1>${THEME_BTN}</div>
+  ${board('pantry')}${tabbar('board')}
+</section>
+<section class="screen" id="mac">
+  <div class="topbar"><h1>Mac<small>Connection and pairing</small></h1>${THEME_BTN}</div>
+  <div class="scroll mac-sheet" style="flex:1">
+    <div class="mac-card"><span class="plate lg">MAC</span><strong>${MAC.name}</strong><span class="k">${MAC.relay} · end-to-end encrypted</span></div>
+    <dl class="facts" style="margin:0">
+      <div><dt>Link</dt><dd style="margin:0"><span class="state working"><i class="dot"></i>Live · 84 ms</span></dd></div>
+      <div><dt>Host key</dt><dd style="margin:0"><code>pOCS…ogk=</code></dd></div>
+      <div><dt>This phone</dt><dd style="margin:0"><code>zo06…YfVk=</code></dd></div>
+      <div><dt>Notifications</dt><dd style="margin:0">Needs a Mac update</dd></div>
+    </dl>
+    <button class="btn quiet block" data-go="pair-1">Pair another Mac</button>
+    <button class="btn quiet block">Forget ${MAC.name}</button>
+  </div>${tabbar('mac')}
+</section>
+<section class="screen" id="chat">${sessionHead('chat')}
+  <div class="scroll" style="flex:1">${THREAD}</div>
+  <div class="composer"><div class="lock">${ico('lock', 'sm')}Answer the plan to continue.</div><button class="send" disabled aria-label="Send">${ico('send')}</button></div>
+</section>
+<section class="screen" id="term">${sessionHead('term')}
+  <div class="term">${TERM}</div>${KEYS}
+</section>
+${PAIRING}`
+boot()
+</script>
+</body>
+</html>

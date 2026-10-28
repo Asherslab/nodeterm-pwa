@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>Option C · Conversation first</title>
+<style>
+/*@include world.css*/
+/* Option C — the app opens inside the most urgent conversation; the frame is a strip of plates you
+   flick between, like mail you pull from pigeonholes one letter at a time. */
+.strip { background: var(--frame); display: flex; gap: 8px; padding: 2px 16px 14px; overflow-x: auto; scrollbar-width: none; flex: none; }
+.strip button { flex: none; position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; width: 92px; padding: 9px 10px 8px; border-radius: 10px; background: var(--frame-2); color: var(--frame-ink-2); text-align: left; }
+.strip button[aria-current='true'] { background: var(--frame-ink); color: var(--frame); }
+.strip .plate { grid-row: auto; font-size: 11px; }
+.strip .nm { font: 500 11.5px/1.2 var(--ui); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+.strip .flag { position: absolute; top: -3px; right: 8px; width: 16px; height: 9px; background: var(--tab); border-radius: 0 0 3px 3px; }
+.strip .flag.spin { background: none; top: 9px; right: 9px; width: 10px; height: 10px; border-radius: 50%; border: 2px solid currentColor; border-right-color: transparent; animation: spin 1.1s linear infinite; }
+.head { display: flex; align-items: center; gap: 10px; }
+.head h1 { font-size: 17px; }
+.handle { flex: none; display: flex; align-items: center; gap: 10px; padding: 9px 16px; background: var(--slot); border-top: 1px solid var(--rule); font: 600 13px/1 var(--ui); color: var(--ink-2); width: 100%; }
+.handle .grip { width: 36px; height: 4px; border-radius: 2px; background: var(--rule-strong); margin: 0 auto; position: absolute; left: 50%; translate: -50% -6px; }
+.handle span.k { margin-left: auto; font: 400 11.5px/1 var(--code); color: var(--ink-3); }
+.sheet-top { background: var(--term-bg); padding: 10px 16px 8px; display: flex; align-items: center; gap: 10px; color: var(--term-ink); }
+.sheet-top .plate { grid-row: auto; }
+.sheet-top b { font: 600 14px/1 var(--ui); flex: 1; }
+.dim { position: absolute; inset: 0; background: rgb(0 0 0 / .45); }
+.menu-sheet { position: absolute; left: 0; right: 0; bottom: 0; top: 54px; background: var(--ground); border-radius: 18px 18px 0 0; display: flex; flex-direction: column; box-shadow: 0 -10px 30px -10px rgb(0 0 0 / .5); }
+.menu-sheet .grab { width: 36px; height: 5px; border-radius: 3px; background: var(--rule-strong); margin: 8px auto 4px; }
+.menu-sheet .bar { display: flex; align-items: center; padding: 6px 16px 4px; gap: 10px; }
+.menu-sheet .bar h2 { font: 700 20px/1.2 var(--ui); margin: 0; flex: 1; }
+</style>
+</head>
+<body>
+<!--@status-->
+<div class="app" id="app"></div>
+<div class="synthetic">Option C · Conversation first · synthetic content</div>
+<script>
+//@include content.js
+const order = [...NEEDS, ...ALL.filter((s) => s.state === 'working'), ...ALL.filter((s) => s.unread)]
+const strip = (cur) => `<div class="strip" role="tablist" aria-label="Sessions">${order.map((s) => `<button data-go="${s.d === 'STG·1' ? 'chat-q' : 'home'}" aria-current="${s.d === cur}">
+  <span class="plate">${s.d}</span><span class="nm">${s.t}</span>${s.state === 'needs' ? '<i class="flag"></i>' : s.state === 'working' ? '<i class="flag spin"></i>' : ''}</button>`).join('')}</div>`
+const head = (s, sub) => `<div class="topbar head"><button class="icon-btn" data-go="menu" aria-label="All sessions">${ico('menu')}</button>
+  <h1>${s}<small><span class="link-state"><i></i>${sub}</span></small></h1>${THEME_BTN}</div>`
+const handle = `<button class="handle" data-go="term" style="position:relative"><span class="grip"></span>${ico('term', 'sm')}Terminal<span class="k">plan prompt · 1/2/3</span></button>`
+
+document.getElementById('app').innerHTML = `
+<section class="screen" id="home">${head('Costco receipt parser', 'PAN·1 · pantry · Claude')}${strip('PAN·1')}
+  <div class="scroll" style="flex:1">${THREAD}</div>${handle}
+  <div class="composer"><div class="lock">${ico('lock', 'sm')}Answer the plan to continue.</div><button class="send" disabled aria-label="Send">${ico('send')}</button></div>
+</section>
+<section class="screen" id="chat-q">${head('NDI source picker', 'STG·1 · stage-cues · Claude')}${strip('STG·1')}
+  <div class="scroll" style="flex:1"><div class="thread">
+    <div class="msg-user">Add a source picker to the operator page: list the NDI sources on the network and switch the program feed.</div>
+    <div class="msg-ai"><div class="tools"><span class="tool"><b>Bash</b> ndi-list --timeout 2</span><span class="tool"><b>Edit</b> Picker.razor</span></div>
+      <p style="margin-top:10px">Found three sources: <code>PTZ 1 (Stage)</code>, <code>PTZ 2 (Pulpit)</code> and <code>WIRECAST (Program)</code>. The picker lists them and switches on tap. One decision before I wire the startup path:</p>
+      <span class="when">Claude · 5 min ago</span></div>
+    ${QUESTION}
+  </div></div>
+  <div class="composer"><div class="lock">${ico('lock', 'sm')}Answer the question to continue.</div><button class="send" disabled aria-label="Send">${ico('send')}</button></div>
+</section>
+<section class="screen" id="term" style="background:var(--term-bg)">
+  <div class="sheet-top"><span class="plate">PAN·1</span><b>Terminal</b><button class="icon-btn" data-go="home" data-back aria-label="Close terminal" style="color:var(--term-ink)">${ico('down')}</button></div>
+  <div class="term">${TERM}</div>${KEYS}
+</section>
+<section class="screen" id="menu">${head('Costco receipt parser', 'PAN·1 · pantry · Claude')}${strip('PAN·1')}
+  <div class="dim"></div>
+  <div class="menu-sheet"><div class="grab"></div>
+    <div class="bar"><h2>${MAC.name}</h2><span class="link-state" style="color:var(--work)"><i></i>Live</span><button class="icon-btn" data-go="home" data-back aria-label="Close">${ico('down')}</button></div>
+    <div class="scroll" style="flex:1;padding-bottom:24px">
+      ${PROJECTS.map((p) => `<div class="shelf"><h2>${p.name}</h2><span>${p.sessions.length}</span><span class="grow"></span><button class="more" data-go="board">Board</button></div><div class="slots">${p.sessions.map((s) => row(s, s.d === 'STG·1' ? 'chat-q' : 'home')).join('')}</div>`).join('')}
+      <div style="padding:20px 16px 0"><button class="btn quiet block" data-go="pair-1">${ico('mac')}Pair another Mac</button></div>
+    </div></div>
+</section>
+<section class="screen" id="board">
+  <div class="topbar"><button class="icon-btn" data-go="menu" data-back aria-label="Back">${ico('back')}</button><h1>pantry<small>Board · tap a card to open its chat</small></h1>${THEME_BTN}</div>
+  ${board('pantry', 'home')}
+</section>
+${PAIRING}`
+boot()
+</script>
+</body>
+</html>

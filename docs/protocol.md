@@ -250,7 +250,7 @@ revoked. Until D1 lands, the PWA polls `projects.list` while open and sets the a
 | **B1** | `api.nodeterm.dev` has no CORS: preflight `OPTIONS` answers **404** with no `Access-Control-*` headers for `/v1/relay/device` and `/v1/relay/join` (origins tried: `https://nodeterm.dev`, `https://asherslab.github.io`, `http://localhost:5173`). A `POST` gets a real reply (`401 {"error":"bad_token"}` for a bogus token, even with `content-type: text/plain`) **without** `Access-Control-Allow-Origin`, so a browser cannot read it. | `curl -X OPTIONS … -H 'Origin: …'` → `HTTP/2 404`; `curl -X POST …/v1/relay/join` → `HTTP/2 401`, no ACAO | A proxy for exactly those two routes, on HTTPS. Best: **one origin serves the PWA and `/api/relay/{device,join}`**, so no CORS is needed. Candidates: Cloudflare Pages + a Pages Function (free), a Worker, or a box the user already runs. It sees `deviceToken`/`pairingToken` (bearer tokens for knocking on the relay room) but never keys or content (E2EE). **The user's call** (hosting). |
 | **B2** | No push path for a non-APNs client | `core/push-notify.ts` only targets `/v1/push/notify`; the backend fans out to APNs (CLAUDE.md "Push webhook") | Desktop change **D1**; interim = foreground polling + badge |
 | B3 | Pairing via LAN `/pair` is impossible from a browser | `http://<LAN IP>:<port>/pair` from an `https://` page is mixed content; the handler 404s `OPTIONS`; it needs the same LAN | Not needed: relay-only TOFU mint (§2), as the official app does off-LAN |
-| B4 | The standing host might not run in the user's build | `relayAllowed()` = `app.isPackaged \|\| NODETERM_RELAY_URL`; the fork runs `electron-vite preview` | The user checks Settings → Phone; if it reads "unavailable in development builds", run with `NODETERM_RELAY_URL=wss://relay.nodeterm.dev` (open question O1) |
+| B4 | The standing host might not run in the user's build | `relayAllowed()` = `app.isPackaged \|\| NODETERM_RELAY_URL`; the fork runs `electron-vite preview` | **Confirmed 2026-10-28**: the user's Settings → Phone says remote access is unavailable in development builds. Fix without code: launch nodeterm with `NODETERM_RELAY_URL=wss://relay.nodeterm.dev` in the environment of `npm start` |
 
 ## 9. Residual risks and open questions
 
@@ -263,6 +263,6 @@ revoked. Until D1 lands, the PWA polls `projects.list` while open and sets the a
 - **R3 – Remove means all phones.** The desktop cannot revoke one phone's relay pin. Removing any phone
   forces the PWA to re-approve.
 - **R4 – no forward secrecy** (inherited, nodeterm docs): a stolen device key decrypts recorded sessions.
-- **O1** Is "Reach this Mac from anywhere" on, and does the standing host run in this build? (B4)
-- **O2** Hosting and proxy choice (B1).
+- **O1** ~~Does the standing host run in this build?~~ No: it is a dev build, see B4.
+- **O2** ~~Hosting and proxy choice~~ Decided: a Home Assistant **add-on** (the meal-planner pattern) serves the PWA and the two-route proxy from one origin behind Nginx Proxy Manager. CORS cannot be added from the fork: the API is nodeterm's backend (nodeterm-server), not desktop code.
 - **O3** Is D1 (Web Push from the desktop) wanted, or is foreground-only enough?

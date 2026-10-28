@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>Option A · Inbox first</title>
+<style>
+/*@include world.css*/
+/* Option A — the queue leads: every waiting ask is answerable right on the home screen. */
+.ctx { display: flex; align-items: center; gap: 8px; margin: 0 2px 8px; font: 500 13px/1.2 var(--ui); color: var(--ink-2); width: 100%; text-align: left; }
+.ctx .title { font-weight: 600; color: var(--ink); }
+.ctx .ico { margin-left: auto; rotate: -90deg; color: var(--ink-3); }
+.queue { padding: 14px 16px 6px; display: grid; gap: 22px; }
+.queue .ask .fade { max-height: 104px; }
+.summary { display: flex; gap: 14px; font: 500 12px/1 var(--ui); color: var(--frame-ink-2); }
+.summary b { color: var(--frame-ink); font-weight: 700; }
+.sess-head { flex-direction: column; align-items: stretch; gap: 10px; }
+.sess-head .line { display: flex; align-items: center; gap: 10px; }
+.sess-head .plate { grid-row: auto; }
+</style>
+</head>
+<body>
+<!--@status-->
+<div class="app" id="app"></div>
+<div class="synthetic">Option A · Inbox first · synthetic content</div>
+<script>
+//@include content.js
+const tabbar = (on) => `<nav class="tabbar">
+  <button data-go="home" data-nav aria-current="${on === 'home'}">${ico('inbox')}Inbox<span class="count">${NEEDS.length}</span></button>
+  <button data-go="sessions" data-nav aria-current="${on === 'sessions'}">${ico('rack')}Sessions</button>
+  <button data-go="board" data-nav aria-current="${on === 'board'}">${ico('board')}Board</button>
+  <button data-go="pair-1" data-nav aria-current="false">${ico('mac')}Mac</button></nav>`
+
+const ctx = (s) => `<button class="ctx" data-go="chat"><span class="plate">${s.d}</span><span class="title">${s.t}</span><span>· ${s.project}</span>${ico('down', 'sm')}</button>`
+const sessionHead = (mode) => `<div class="topbar sess-head">
+  <div class="line"><button class="icon-btn" data-go="home" data-back aria-label="Back">${ico('back')}</button>
+    <span class="plate lg">PAN·1</span><h1>Costco receipt parser<small>Claude · pantry · waiting on you</small></h1>${THEME_BTN}</div>
+  <div class="seg"><button data-go="chat" data-seg aria-pressed="${mode === 'chat'}">${ico('chat', 'sm')}Chat</button><button data-go="term" data-seg aria-pressed="${mode === 'term'}">${ico('term', 'sm')}Terminal</button></div></div>`
+
+document.getElementById('app').innerHTML = `
+<section class="screen" id="home">
+  <div class="topbar"><h1>Waiting on you<small><span class="link-state"><i></i>${MAC.name} · live</span></small></h1>${THEME_BTN}</div>
+  <div class="scroll" style="flex:1">
+    <div class="queue">
+      <div>${ctx(ALL.find((s) => s.d === 'FAN·1'))}${ALLOW}</div>
+      <div>${ctx(ALL.find((s) => s.d === 'PAN·1'))}${PLAN.replace('<button class="btn quiet block">Revise…</button>', '<button class="btn quiet block" data-go="chat">Read the whole plan</button>')}</div>
+      <div>${ctx(ALL.find((s) => s.d === 'STG·1'))}${QUESTION}</div>
+    </div>
+    <div class="shelf"><h2>Working</h2><span>3</span></div>
+    <div class="slots">${ALL.filter((s) => s.state === 'working').map((s) => row(s)).join('')}</div>
+    <div class="shelf"><h2>Finished</h2><span>1 unread</span></div>
+    <div class="slots" style="margin-bottom:24px">${row(ALL.find((s) => s.d === 'PAN·3'))}</div>
+  </div>${tabbar('home')}
+</section>
+<section class="screen" id="sessions">
+  <div class="topbar"><h1>Sessions<small>4 projects · 10 sessions</small></h1>${THEME_BTN}</div>
+  <div class="scroll" style="flex:1;padding-bottom:20px">
+    ${PROJECTS.map((p) => `<div class="shelf"><h2>${p.name}</h2><span>${p.path}</span></div><div class="slots">${p.sessions.map((s) => row(s)).join('')}</div>`).join('')}
+  </div>${tabbar('sessions')}
+</section>
+<section class="screen" id="board">
+  <div class="topbar"><h1>pantry<small>Board · 4 columns · swipe</small></h1><button class="icon-btn" aria-label="Choose project">${ico('down')}</button>${THEME_BTN}</div>
+  ${board('pantry')}${tabbar('board')}
+</section>
+<section class="screen" id="chat">${sessionHead('chat')}
+  <div class="scroll" style="flex:1">${THREAD}</div>
+  <div class="composer"><div class="lock">${ico('lock', 'sm')}Answer the plan to continue. The Mac won't take a prompt while it waits.</div><button class="send" disabled aria-label="Send">${ico('send')}</button></div>
+</section>
+<section class="screen" id="term">${sessionHead('term')}
+  <div class="term">${TERM}</div>${KEYS}
+</section>
+${PAIRING}`
+boot()
+</script>
+</body>
+</html>
