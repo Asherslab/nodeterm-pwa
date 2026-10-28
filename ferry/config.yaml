@@ -7,7 +7,7 @@ slug: ferry
 url: https://github.com/Asherslab/nodeterm-pwa
 # Written by CI (.github/workflows/docker-publish.yml) AFTER the image with this tag is pushed: that commit is
 # what makes Home Assistant offer the update. Never edit by hand: a version with no image fails to install.
-version: "0.0.1"
+version: "0.0.2"
 # One multi-arch image on GHCR, pulled by platform (no {arch} in the name). Building on the Pi starved other
 # add-ons (Nginx Proxy Manager fell over during the first install), so it is never built there.
 image: ghcr.io/asherslab/nodeterm-pwa-ferry
