@@ -1,0 +1,94 @@
+{
+  "title": "Choose the visual world",
+  "question": "The roll assigned the Sorting Frame. Keep it, take an alternate, or re-roll. (The layout is a separate, later round.)",
+  "options": [
+    {
+      "id": "assigned", "kind": "assigned", "label": "Sorting Frame", "kicker": "THE ROLL",
+      "lineage": "post-room pigeonhole frames and brass label holders",
+      "thesis": "Every session is a slot; one that needs you pushes a vermilion tab out past the edge.",
+      "palette": ["#1f4a44", "#e6eae4", "#c9a452", "#c93a22", "#161c1a"],
+      "materials": ["enamelled steel", "brass label plates", "index tabs"],
+      "viewport": "Green frame header, shelves of session slots with brass designators, tabs on the right edge.",
+      "risk": "Can read as a skin if the tab isn't used everywhere.",
+      "raised": [
+        {"from": "challenger-lexicon", "raise": "Colour quarantine: vermilion exists only on needs-you tabs and answer cards."},
+        {"from": "challenger-annual", "raise": "Structure is hairlines and one shadow, never nested cards."},
+        {"from": "challenger-labanotation", "raise": "Duration is length: a working slot draws a rule as long as its time in state."},
+        {"from": "challenger-catalog", "raise": "Stable designators (PAN·1) identical on every surface a session appears."},
+        {"from": "challenger-exposure", "raise": "Unknown or stale state is hatched, never drawn as solid fact."}
+      ],
+      "html": ".impeccable/mocks/decision/assigned.html", "htmlFrame": "390x844"
+    },
+    {
+      "id": "model-pick", "kind": "pick", "label": "Flight Strip Board", "kicker": "IMPECCABLE’S PICK",
+      "lineage": "air-traffic flight progress strips in a strip bay",
+      "thesis": "Each agent is a coloured paper strip; a strip that needs you is cocked out of line.",
+      "palette": ["#2b3440", "#f1ead2", "#cfe3f2", "#f6d0c8", "#d6452f"],
+      "materials": ["buff and blue card strips", "grease-pencil marks", "aluminium strip holders"],
+      "viewport": "Dark bay header, strips stacked by state, needs-you strips offset to the right with a pencil mark.",
+      "risk": "Closest to my own instinct for 'queue of things in flight'; familiar to ATC fans, opaque to nobody.",
+      "html": ".impeccable/mocks/decision/model-pick.html", "htmlFrame": "390x844"
+    },
+    {
+      "id": "challenger-gateboard", "kind": "challenger", "catalogId": "vernacular-ephemera-boarding-pass-and-gate-board",
+      "label": "Gate Board", "verdict": "competitive",
+      "lineage": "airport gate boards and segmented boarding passes",
+      "thesis": "Sessions rerank in place like departures; a changed one stays lit until you've seen it.",
+      "palette": ["#0d1117", "#f2f2ee", "#ffcc33", "#2a2f36"],
+      "materials": ["backlit panel", "tabular figures", "pass segments"],
+      "viewport": "Board of rows ordered by urgency, the session view as a segmented pass.",
+      "case": "Fuses cleanly and is very clear; loses narrowly on identity: it reads as travel, not your desk.",
+      "risk": "Amber-on-black boards drift toward a generic 'ops dashboard' look.",
+      "html": ".impeccable/mocks/decision/challenger-gateboard.html", "htmlFrame": "390x844",
+      "hero": "https://impeccable.style/worlds/cards/vernacular-ephemera-boarding-pass-and-gate-board-hero.webp"
+    },
+    {
+      "id": "challenger-lexicon", "kind": "challenger", "catalogId": "rw-lexicon-shoulder-and-plate", "label": "Lexicon Plate", "verdict": "declined",
+      "lineage": "19th-century lexicon spreads", "thesis": "Black text columns; colour only inside bordered plates.",
+      "palette": ["#1a1a1a", "#f1ead9", "#d4472a"], "materials": ["engraving", "uncoated stock"],
+      "viewport": "Guide words naming the sessions in view.", "risk": "A reading world on a glance-and-tap screen.",
+      "case": "Loses both axes on a one-hand operate screen.", "kept": "Colour quarantine."
+    },
+    {
+      "id": "challenger-annual", "kind": "challenger", "catalogId": "design-annual-s-plate-section", "label": "Annual Plate Section", "verdict": "declined",
+      "lineage": "design annual plate pages", "thesis": "Registration furniture and one grotesque.",
+      "palette": ["#f5f4f6", "#16181a", "#dcddf3"], "materials": ["hairlines", "crosshairs"],
+      "viewport": "A continuous sheet of plates.", "risk": "Gallery, not tool.",
+      "case": "Fuses poorly: nothing to show off here.", "kept": "Hairline construction."
+    },
+    {
+      "id": "challenger-labanotation", "kind": "challenger", "catalogId": "notation-diagram-systems-labanotation", "label": "Labanotation Score", "verdict": "declined",
+      "lineage": "dance notation", "thesis": "Shape is direction, length is duration.",
+      "palette": ["#ffffff", "#111111", "#d9d9d9"], "materials": ["score paper", "hatched blocks"],
+      "viewport": "A vertical staff of agent activity.", "risk": "Unreadable without training.",
+      "case": "Loses clarity badly.", "kept": "Length encodes duration."
+    },
+    {
+      "id": "challenger-catalog", "kind": "challenger", "catalogId": "pop-culture-shelf-doujin-event-catalog", "label": "Event Circle Catalog", "verdict": "declined",
+      "lineage": "doujin convention catalogs", "thesis": "Stamp-sized cells keyed to table codes.",
+      "palette": ["#e9e6df", "#111111", "#2b6cd4"], "materials": ["newsprint", "biro circles"],
+      "viewport": "A dense grid of session cells.", "risk": "Too dense for one hand.",
+      "case": "Loses both axes.", "kept": "Stable short codes."
+    },
+    {
+      "id": "challenger-exposure", "kind": "challenger", "catalogId": "operate-b-exposure-record-zone-sheets", "label": "Exposure Record", "verdict": "declined",
+      "lineage": "darkroom exposure cards", "thesis": "Translucent sheets and hatch density as load.",
+      "palette": ["#e8e8e4", "#2a2a2a", "#c8338a"], "materials": ["tracing overlays", "zone wedge"],
+      "viewport": "Stacked sheets per project.", "risk": "Overlapping sheets fight small screens.",
+      "case": "Loses clarity on a phone.", "kept": "Hatching for uncertain state."
+    }
+  ],
+  "reroll": {"registers": ["safer", "bolder"]},
+  "buildPath": {"value": "code"},
+  "canon": true,
+  "canonCard": {
+    "kind": "canon", "label": "The category standard",
+    "thesis": "A clean iOS-style list app, executed impeccably.",
+    "palette": ["#ffffff", "#f2f2f7", "#111111", "#0a84ff"],
+    "materials": ["grouped lists", "SF symbols-style icons"],
+    "viewport": "Large-title Sessions list, grouped by project, status badges, tab bar.",
+    "risk": "Indistinguishable from any client app by design.",
+    "html": ".impeccable/mocks/decision/canon.html", "htmlFrame": "390x844"
+  },
+  "steer": true
+}

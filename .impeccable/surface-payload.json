@@ -1,0 +1,36 @@
+{
+  "title": "Choose the layout",
+  "question": "The world is the Sorting Frame. The roll dealt three ways to organise the app. Lock one, steer, or re-roll.",
+  "options": [
+    {
+      "id": "deck", "kind": "assigned", "label": "The Pulled Letter", "kicker": "THE ROLL",
+      "thesis": "One session at a time, full screen, like a letter pulled from its slot: answer it, then the next one slides up.",
+      "palette": ["#1f4a44", "#e6eae4", "#c9a452", "#c93a22"],
+      "materials": ["a stack of session cards", "the frame's slot strip behind"],
+      "viewport": "A rail of slot designators across the top (needs-you first, tabbed); below it the current session as one big card with its ask answerable and the last message; swipe or tap 'Next waiting'.",
+      "risk": "Least overview: finding a quiet session takes the slot rail or a pull-down.",
+      "html": ".impeccable/mocks/decision/surface-deck.html", "htmlFrame": "390x844"
+    },
+    {
+      "id": "inbox", "kind": "dealt", "label": "Inbox First",
+      "thesis": "Home is 'Waiting on you': every approval, plan and question answerable in place, working sessions below.",
+      "palette": ["#1f4a44", "#e6eae4", "#c9a452", "#c93a22"],
+      "materials": ["answer cards", "slot rows", "tab bar: Inbox · Sessions · Board · Mac"],
+      "viewport": "Header 'Waiting on you · 3', permission and plan cards with their buttons, then the Working shelf.",
+      "risk": "Long plans get clipped on the home screen; non-waiting sessions are one tab away.",
+      "html": ".impeccable/mocks/decision/surface-inbox.html", "htmlFrame": "390x844"
+    },
+    {
+      "id": "rack", "kind": "dealt", "label": "The Rack",
+      "thesis": "Home is the whole frame: every project shelf with its slots, needs-you tabs sticking out on the right edge.",
+      "palette": ["#1f4a44", "#e6eae4", "#c9a452", "#c93a22"],
+      "materials": ["project shelves", "slot rows", "All / Need you / Working filter"],
+      "viewport": "Mac name + live state, a three-way filter, then shelves of sessions; tap opens Chat | Terminal.",
+      "risk": "Answering always costs one tap in; ten-plus sessions scroll.",
+      "html": ".impeccable/mocks/decision/surface-rack.html", "htmlFrame": "390x844"
+    }
+  ],
+  "reroll": true,
+  "buildPath": {"value": "code"},
+  "steer": true
+}
