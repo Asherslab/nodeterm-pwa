@@ -76,7 +76,7 @@ describe('rpc', () => {
     host.handle = () => {
       throw { message: AWAITING_APPROVAL }
     }
-    const err = await rpc.request('host.info').catch((e) => e)
+    const err = (await rpc.request('host.info').catch((e) => e)) as RpcError
     expect(err).toBeInstanceOf(RpcError)
     expect(err.message).toBe(AWAITING_APPROVAL)
     expect(host.envelopes[0]).toMatchObject({ kind: 'req', method: 'host.info' })

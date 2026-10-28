@@ -8,6 +8,7 @@ import { connectRelaySocket, type RelaySocket, type Transport } from './socket'
 import { AWAITING_APPROVAL, RelayRpc, RpcError } from './rpc'
 import type { HostIdentity } from './paircode'
 import * as store from './store'
+import { buf } from './b64'
 
 export type LinkState =
   | { kind: 'loading' }
@@ -36,12 +37,12 @@ export function webSocketTransport(url: string): Transport {
     closeCb?.()
   }
   ws.onopen = () => {
-    for (const m of queue.splice(0)) ws.send(m)
+    for (const m of queue.splice(0)) ws.send(typeof m === 'string' ? m : buf(m))
   }
   ws.onclose = fireClose
   ws.onerror = fireClose
   return {
-    send: (d) => (ws.readyState === WebSocket.OPEN ? ws.send(d) : queue.push(d)),
+    send: (d) => (ws.readyState === WebSocket.OPEN ? ws.send(typeof d === 'string' ? d : buf(d)) : queue.push(d)),
     close: () => ws.close(),
     onMessage: (cb) => {
       ws.onmessage = (e) => cb(typeof e.data === 'string' ? e.data : new Uint8Array(e.data as ArrayBuffer))
@@ -72,6 +73,19 @@ export class Connection {
   private retryTimer: ReturnType<typeof setTimeout> | null = null
 
   constructor(private deps: ConnectionDeps = { transport: webSocketTransport, fetch: (...a) => fetch(...a), now: () => Date.now() }) {}
+
+  /** Development only (src/dev/demo.ts): drive the real screens from a scripted host. */
+  demo(rpc: RelayRpc, host: HostIdentity): void {
+    this.rpc = rpc
+    this.host = host
+    this.pairing = { host, approvedAt: 1, deviceToken: null }
+    this.set({ kind: 'live', sas: '561 048 8895' })
+  }
+
+  /** This device was approved on the Mac at least once (its key is pinned there). */
+  get approved(): boolean {
+    return !!this.pairing?.approvedAt
+  }
 
   subscribe(cb: (s: LinkState) => void): () => void {
     this.listeners.add(cb)

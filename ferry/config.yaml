@@ -1,0 +1,43 @@
+# The Home Assistant add-on. Reference: https://developers.home-assistant.io/docs/add-ons/configuration
+# Why it looks like this: README.md "Deploying" and docs/protocol.md (B1).
+
+name: Ferry
+description: A phone web app for your nodeterm desktop, reachable from anywhere through nodeterm's encrypted relay.
+slug: ferry
+url: https://github.com/Asherslab/nodeterm-pwa
+version: "0.1.0"
+# No `image:` - the Supervisor builds ferry/Dockerfile on this machine, so nothing is published anywhere.
+arch:
+  - aarch64
+  - amd64
+startup: application
+boot: auto
+
+# Reached at its own HTTPS address through Nginx Proxy Manager (HTTPS only), so it can be installed on a
+# phone. Not through Home Assistant's sidebar: an app inside HA's frame cannot be installed as a PWA.
+# Nothing is published on the host unless a port is set on the Network tab.
+ingress: false
+ports:
+  8099/tcp: null
+ports_description:
+  8099/tcp: Only for a proxy on another machine. Leave empty for Nginx Proxy Manager on this Home Assistant.
+
+# Least privilege, spelled out so an audit does not have to know the defaults: this add-on talks to
+# Home Assistant about nothing, sees no host folder, device or network, and holds no secret.
+homeassistant_api: false
+hassio_api: false
+auth_api: false
+docker_api: false
+host_network: false
+host_pid: false
+host_ipc: false
+privileged: []
+devices: []
+map: []
+full_access: false
+apparmor: true
+
+# Nothing to configure and nothing to back up: pairing state lives on the phone.
+options: {}
+schema: {}
+backup: cold
