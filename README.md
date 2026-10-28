@@ -57,23 +57,25 @@ single-use join tokens). With those, someone could knock on your Mac's relay roo
 not get in. Getting in takes this phone's private key, and a different key raises a fresh approval
 dialog on the Mac. `ferry/server/server.test.ts` pins all of the above.
 
-## Deploying (Home Assistant add-on, no registry needed)
+## Deploying (Home Assistant add-on)
 
-`config.yaml` has no `image:`, so Home Assistant builds `ferry/Dockerfile` on the HA machine itself.
+Every push to `main` (outside docs and design) runs `.github/workflows/docker-publish.yml`. It works out a
+semantic version, runs the tests, builds ONE multi-arch image (`ghcr.io/asherslab/nodeterm-pwa-ferry`) and
+then bumps `ferry/config.yaml` to that version, which is what makes Home Assistant offer the update.
+Nothing is built on the Home Assistant machine: an on-box build (npm + Vite) starved the other add-ons
+on a Pi and took Nginx Proxy Manager down during the first install.
 
-1. Copy the `ferry/` folder (without `node_modules`/`dist`) into Home Assistant's local add-ons folder,
-   `/addons/ferry` (the Samba or SSH add-on gives you access).
-2. Settings → Add-ons → Add-on store → ⋮ → **Check for updates**. **Ferry** appears under *Local
-   add-ons*. Install it (the build takes a few minutes on a Pi) and Start it.
-3. In **Nginx Proxy Manager**, add a proxy host for the address you want (e.g.
-   `ferry.your-domain`). Forward to `local-ferry` port `8099` over `http`, request a Let's Encrypt
-   certificate, and force SSL. Do not enable "Websockets support": the relay socket goes straight to
-   relay.nodeterm.dev.
-4. On the iPhone, open that address in Safari, then **Share → Add to Home Screen**. Open it from the
-   Home Screen before pairing: iOS keeps an installed app's storage, but may clear a tab's.
-
-(Alternatively, push this repo to GitHub and add it as an add-on repository. `repository.yaml`
-is ready.)
+1. Home Assistant: Settings → Add-ons → Add-on store → ⋮ → Repositories →
+   `https://github.com/Asherslab/nodeterm-pwa`. Install **Ferry** and start it.
+2. The GHCR package must be **public** for Home Assistant to pull it without credentials:
+   GitHub → your profile → Packages → `nodeterm-pwa-ferry` → Package settings → Change visibility.
+   (It holds only what this public repo already shows.)
+3. In **Nginx Proxy Manager**, add a proxy host for the address you want (e.g. `ferry.your-domain`):
+   forward to `http`, the add-on's hostname (its *Hostname* on the add-on's Info tab, from this repository
+   `<repo-hash>-ferry`), port `8099`; request a Let's Encrypt certificate and force SSL. No "Websockets
+   support" is needed: the relay socket goes straight to relay.nodeterm.dev.
+4. On the iPhone, open that address in Safari, then **Share → Add to Home Screen**, and open it from
+   the Home Screen before pairing: iOS keeps an installed app's storage, but may clear a tab's.
 
 ## Pairing
 
