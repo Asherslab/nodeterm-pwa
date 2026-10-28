@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'preact/hooks'
 import { connection, useLink } from '../state'
 import { decodePairCode } from '../relay/paircode'
 import { Icon } from './icons'
+import { UpdateBanner } from './rack'
 
 const SAS_HINT = 'Compare all ten digits. If the other device shows only six, it runs an older version: compare the first six.'
 
@@ -76,6 +77,7 @@ export function PairScreen() {
         ) : null}
         <h1>{step === 'paste' ? 'Paste the code' : 'Pair a Mac'}</h1>
       </header>
+      <UpdateBanner />
       <div class="pair scroll">
         {step === 'intro' ? (
           <>

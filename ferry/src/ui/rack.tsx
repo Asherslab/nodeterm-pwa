@@ -3,6 +3,7 @@ import { useEffect, useState } from 'preact/hooks'
 import { connection, ago, href, useLink, useSnapshot, type Route } from '../state'
 import { counts, type Session } from '../relay/projects'
 import { Icon } from './icons'
+import { applyUpdate, useUpdateReady } from '../update'
 
 const TAB_LABEL = { plan: 'Plan', ask: 'Ask', allow: 'Allow?', needs: 'You' } as const
 
@@ -68,6 +69,33 @@ export function TabBar({ on, needs }: { on: 'rack' | 'board' | 'mac'; needs: num
 
 /** One line under the header whenever the link is anything but live: state is never shown as current
  *  when it is not. */
+/** Across the top of every screen once a new build has downloaded and is waiting (src/update.ts):
+ *  without it the new build waits until the app is fully closed, which an installed phone app seldom is. */
+export function UpdateBanner() {
+  const ready = useUpdateReady()
+  const [busy, setBusy] = useState(false)
+  if (!ready) return null
+  return (
+    <div class="banner update" role="status">
+      <span>A new version of the app is ready.</span>
+      <button class="banner-act" disabled={busy} onClick={() => (setBusy(true), void applyUpdate())}>
+        <Icon name="retry" small />
+        {busy ? 'Updating…' : 'Reload'}
+      </button>
+    </div>
+  )
+}
+
+/** Everything that can sit under a screen's header: a waiting update, then the link state. */
+export function StatusBanners() {
+  return (
+    <>
+      <UpdateBanner />
+      <LinkBanner />
+    </>
+  )
+}
+
 const QUIET_RECONNECT_MS = 3000
 
 export function LinkBanner() {
@@ -144,7 +172,7 @@ export function Rack({ route }: { route: Extract<Route, { name: 'rack' }> }) {
           ))}
         </div>
       </div>
-      <LinkBanner />
+      <StatusBanners />
       <div class="scroll rack-scroll">
         {!snap ? (
           <Empty title={error ? "Couldn't load the sessions." : 'Loading sessions…'} body={error ?? undefined} />

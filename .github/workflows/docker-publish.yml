@@ -87,6 +87,7 @@ jobs:
           context: ferry
           file: ferry/Dockerfile
           platforms: linux/amd64,linux/arm64
+          build-args: VERSION=${{ needs.version.outputs.version }}
           cache-from: type=registry,ref=${{ env.IMAGE }}:latest
           cache-to: type=inline
           # Links the package to this repository, so it shows on the repo page.

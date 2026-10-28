@@ -5,7 +5,7 @@ import { useState } from 'preact/hooks'
 import { connection, href, refreshProjects, useSnapshot } from '../state'
 import { counts } from '../relay/projects'
 import { Icon } from './icons'
-import { Empty, LinkBanner, StateLine, TabBar } from './rack'
+import { Empty, StatusBanners, StateLine, TabBar } from './rack'
 
 const UNGROUPED = { id: '', title: 'Ungrouped', color: '#8a978f' }
 
@@ -50,7 +50,7 @@ export function BoardScreen({ projectId }: { projectId: string | null }) {
           </select>
         ) : null}
       </header>
-      <LinkBanner />
+      <StatusBanners />
       {error ? <div class="send-note refused">{error}</div> : null}
       {!shelf ? (
         <div class="scroll" style={{ flex: 1 }}><Empty title="No projects yet." /></div>

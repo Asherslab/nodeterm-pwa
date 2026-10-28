@@ -1,7 +1,9 @@
 import { connection, useLink, useSnapshot, useTheme } from '../state'
 import { counts } from '../relay/projects'
 import { Icon } from './icons'
-import { LinkBanner, TabBar } from './rack'
+import { useState } from 'preact/hooks'
+import { APP_VERSION, applyUpdate, checkForUpdate, useUpdateReady } from '../update'
+import { StatusBanners, TabBar } from './rack'
 
 const short = (b64: string) => `${b64.slice(0, 4)}…${b64.slice(-5)}`
 
@@ -19,7 +21,7 @@ export function MacScreen() {
           Mac<small>Connection and pairing</small>
         </h1>
       </header>
-      <LinkBanner />
+      <StatusBanners />
       <div class="scroll mac-sheet">
         <div class="mac-card">
           <span class="plate lg">MAC</span>
@@ -48,6 +50,14 @@ export function MacScreen() {
           <div>
             <dt>Notifications</dt>
             <dd>Need a Mac update (D1)</dd>
+          </div>
+          <div>
+            <dt>App version</dt>
+            <dd class="tnum">{APP_VERSION}</dd>
+          </div>
+          <div>
+            <dt>Updates</dt>
+            <dd><UpdateCheck /></dd>
           </div>
           <div>
             <dt>Appearance</dt>
@@ -79,5 +89,28 @@ export function MacScreen() {
       </div>
       <TabBar on="mac" needs={snap ? counts(snap).needs : 0} />
     </section>
+  )
+}
+
+function UpdateCheck() {
+  const ready = useUpdateReady()
+  const [state, setState] = useState<'idle' | 'checking' | 'latest' | 'updating'>('idle')
+  if (ready || state === 'updating')
+    return (
+      <button class="link-btn" disabled={state === 'updating'} onClick={() => (setState('updating'), void applyUpdate())}>
+        {state === 'updating' ? 'Updating…' : 'Reload to update'}
+      </button>
+    )
+  return (
+    <button
+      class="link-btn"
+      disabled={state === 'checking'}
+      onClick={async () => {
+        setState('checking')
+        setState((await checkForUpdate()) ? 'idle' : 'latest')
+      }}
+    >
+      {state === 'checking' ? 'Checking…' : state === 'latest' ? 'Up to date · check again' : 'Check for updates'}
+    </button>
   )
 }

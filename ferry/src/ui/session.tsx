@@ -3,7 +3,7 @@ import { Icon } from './icons'
 import { Chat } from './chat'
 import { useEffect, useState } from 'preact/hooks'
 import type { Session } from '../relay/projects'
-import { LinkBanner, Empty } from './rack'
+import { StatusBanners, Empty } from './rack'
 
 export function SessionScreen({ id, mode }: { id: string; mode: 'chat' | 'term' }) {
   const { snap } = useSnapshot()
@@ -35,7 +35,7 @@ export function SessionScreen({ id, mode }: { id: string; mode: 'chat' | 'term' 
           </a>
         </div>
       </header>
-      <LinkBanner />
+      <StatusBanners />
       {!s ? (
         <div class="scroll" style={{ flex: 1 }}>
           <Empty title={snap ? 'This session is no longer on the Mac.' : 'Loading…'} />

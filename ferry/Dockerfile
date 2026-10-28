@@ -4,11 +4,13 @@
 # arm64 image needs no emulation. A RUN in the final stage would break that: the arm64 build would fail with
 # "exec format error" (add QEMU then, knowingly). The image runs as the unprivileged `node` user.
 FROM --platform=$BUILDPLATFORM node:22-alpine AS build
+# The release number CI computed, shown on the Mac screen so the phone says which build it runs.
+ARG VERSION=local
 WORKDIR /src
 COPY package.json package-lock.json ./
 RUN npm ci --include=dev --no-audit --no-fund
 COPY . .
-RUN npm run build && test -f dist/index.html && test -f dist/sw.js
+RUN VITE_APP_VERSION=$VERSION npm run build && test -f dist/index.html && test -f dist/sw.js
 
 FROM node:22-alpine
 WORKDIR /app
