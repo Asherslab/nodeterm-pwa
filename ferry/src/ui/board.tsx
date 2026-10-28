@@ -39,8 +39,8 @@ export function BoardScreen({ projectId }: { projectId: string | null }) {
     <section class="screen on">
       <header class="topbar">
         <h1>
-          {shelf?.name ?? 'Board'}
-          <small>{shelf?.kanban ? `Board · ${shelf.kanban.columns.length} columns · swipe` : 'Board'}</small>
+          Board
+          <small>{shelf?.kanban ? `${shelf.kanban.columns.length} columns · swipe across` : shelf?.name ?? ''}</small>
         </h1>
         {shelves.length > 1 ? (
           <select class="project-pick" aria-label="Project" value={shelf?.id} onChange={(e) => (location.hash = href.board((e.target as HTMLSelectElement).value))}>

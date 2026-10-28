@@ -79,6 +79,8 @@ export function Chat({ session }: { session: Session }) {
   const [draft, setDraft] = useState('')
   const [sendNote, setSendNote] = useState<{ kind: 'refused' | 'unconfirmed' | 'sent'; text: string } | null>(null)
   const [sending, setSending] = useState(false)
+  // What was answered stays in the thread until the transcript itself moves on (finish review #6).
+  const [receipt, setReceipt] = useState<{ pendingId: string; text: string; at: number } | null>(null)
   const scroller = useRef<HTMLDivElement>(null)
   const nodeId = session.id
 
@@ -108,10 +110,12 @@ export function Chat({ session }: { session: Session }) {
     if (el) el.scrollTop = el.scrollHeight
   }, [count, status?.held?.pendingId])
 
-  async function answer(body: Record<string, unknown>) {
+  async function answer(body: Record<string, unknown>, label: string) {
     if (!status?.held || !connection.rpc) return false
+    const pendingId = status.held.pendingId
     try {
-      const r = await connection.rpc.request<{ ok: boolean }>('agent.answer', { nodeId, pendingId: status.held.pendingId, answer: body })
+      const r = await connection.rpc.request<{ ok: boolean }>('agent.answer', { nodeId, pendingId, answer: body })
+      if (r.ok) setReceipt({ pendingId, text: label, at: Date.now() })
       void load()
       void refreshProjects()
       return r.ok
@@ -161,6 +165,9 @@ export function Chat({ session }: { session: Session }) {
           {page && !page.found ? <p class="chat-note">No conversation on the Mac for this session yet.</p> : null}
           {page?.olderCursor !== null && page?.messages.length ? <p class="chat-note">Earlier messages are on the Mac.</p> : null}
           {page?.messages.map((m, i) => <Msg key={m.key ?? i} m={m} last={i === page.messages.length - 1} model={page.model} />)}
+          {receipt && held?.pendingId !== receipt.pendingId ? (
+            <div class="receipt"><Icon name="check" small /><span><b>{receipt.text}</b> · {rel(receipt.at)}</span></div>
+          ) : null}
           {held ? <AskCard held={held} page={page} structured={status!.structuredAnswers} designator={session.designator} onAnswer={answer} nodeId={nodeId} /> : null}
           {status?.state === 'working' && !held ? (
             <div class="working-row">
@@ -226,16 +233,18 @@ function AskCard(props: {
   structured: boolean
   designator: string
   nodeId: string
-  onAnswer: (a: Record<string, unknown>) => Promise<boolean>
+  onAnswer: (a: Record<string, unknown>, label: string) => Promise<boolean>
 }) {
   const { held, page, structured } = props
   const [state, setState] = useState<'idle' | 'sending' | 'done' | 'failed'>('idle')
   const [revise, setRevise] = useState<string | null>(null)
   const [picks, setPicks] = useState<Record<string, string[]>>({})
-  const go = async (a: Record<string, unknown>) => {
+  const go = async (a: Record<string, unknown>, label: string) => {
     setState('sending')
-    setState((await props.onAnswer(a)) ? 'done' : 'failed')
+    setState((await props.onAnswer(a, label)) ? 'done' : 'failed')
   }
+  const busy = state === 'sending'
+  const say = (t: string) => (busy ? 'Sending…' : t)
   const terminalOnly = (
     <div class="body">
       This request can only be answered in the terminal (the Mac's hook script is older than structured answers).
@@ -244,19 +253,14 @@ function AskCard(props: {
       </div>
     </div>
   )
-  if (state === 'done')
-    return (
-      <div class="ask sent">
-        <header><Icon name="check" small />Answered · the agent continues</header>
-      </div>
-    )
+  if (state === 'done') return null
   const failed = state === 'failed' ? <p class="ask-fail">The Mac didn't accept that answer. It may already be answered: check the terminal.</p> : null
 
   if (held.toolName === PLAN_TOOL) {
     const plan = lastTool(page, PLAN_TOOL)
     return (
       <div class="ask">
-        <header><Icon name="chat" small />Plan to approve · {props.designator}</header>
+        <h3>Approve this plan?</h3>
         <div class="body"><Markdown text={plan?.body ?? plan?.arg ?? 'The plan is in the terminal.'} /></div>
         {failed}
         {!structured ? terminalOnly : revise !== null ? (
@@ -264,15 +268,15 @@ function AskCard(props: {
             <textarea class="field revise" rows={3} placeholder="What should change?" value={revise} onInput={(e) => setRevise((e.target as HTMLTextAreaElement).value)} />
             <div class="actions two" style={{ padding: 0 }}>
               <button class="btn quiet" onClick={() => setRevise(null)}>Back</button>
-              <button class="btn answer" disabled={!revise.trim() || state === 'sending'} onClick={() => void go({ kind: 'plan-revise', message: revise.slice(0, 8000) })}>Send revision</button>
+              <button class="btn answer" disabled={!revise.trim() || state === 'sending'} onClick={() => void go({ kind: 'plan-revise', message: revise.slice(0, 8000) }, 'Sent a revision')}>{say('Send revision')}</button>
             </div>
           </div>
         ) : (
           <div class="actions">
-            <button class="btn answer block" disabled={state === 'sending'} onClick={() => void go({ kind: 'plan', mode: 'restore' })}>Approve · keep current mode</button>
+            <button class="btn answer block" disabled={busy} onClick={() => void go({ kind: 'plan', mode: 'restore' }, 'Approved · keep current mode')}>{say('Approve · keep current mode')}</button>
             <div class="actions two" style={{ padding: 0 }}>
-              <button class="btn quiet" disabled={state === 'sending'} onClick={() => void go({ kind: 'plan', mode: 'acceptEdits' })}>Accept edits</button>
-              <button class="btn quiet" disabled={state === 'sending'} onClick={() => void go({ kind: 'plan', mode: 'manual' })}>Ask before edits</button>
+              <button class="btn quiet" disabled={busy} onClick={() => void go({ kind: 'plan', mode: 'acceptEdits' }, 'Approved · accept edits')}>Accept edits</button>
+              <button class="btn quiet" disabled={busy} onClick={() => void go({ kind: 'plan', mode: 'manual' }, 'Approved · ask before edits')}>Ask before edits</button>
             </div>
             <button class="btn quiet block" onClick={() => setRevise('')}>Revise…</button>
           </div>
@@ -287,7 +291,6 @@ function AskCard(props: {
     const complete = qs.length > 0 && qs.every((q) => (picks[q.question] ?? []).length > 0)
     return (
       <div class="ask">
-        <header><Icon name="chat" small />Question · {props.designator}</header>
         {!structured || qs.length === 0 ? (
           <>
             {tool?.body ? <div class="body"><Markdown text={tool.body} /></div> : null}
@@ -325,15 +328,18 @@ function AskCard(props: {
             <div class="actions">
               <button
                 class="btn answer block"
-                disabled={!complete || state === 'sending'}
+                disabled={!complete || busy}
                 onClick={() =>
-                  void go({
-                    kind: 'question',
-                    answers: Object.fromEntries(qs.map((q) => [q.question, q.multiSelect ? picks[q.question]! : picks[q.question]![0]!]))
-                  })
+                  void go(
+                    {
+                      kind: 'question',
+                      answers: Object.fromEntries(qs.map((q) => [q.question, q.multiSelect ? picks[q.question]! : picks[q.question]![0]!]))
+                    },
+                    `Answered: ${qs.map((q) => (picks[q.question] ?? []).join(', ')).join(' / ')}`
+                  )
                 }
               >
-                Send answer
+                {say('Send answer')}
               </button>
             </div>
           </>
@@ -345,13 +351,12 @@ function AskCard(props: {
   const tool = lastTool(page, held.toolName)
   return (
     <div class="ask">
-      <header><Icon name="lock" small />Permission · {props.designator}</header>
       <h3>Allow {held.toolName}?</h3>
       {tool?.arg ? <div class="body"><div class="cmd">{tool.arg}</div></div> : null}
       {failed}
       <div class="actions two">
-        <button class="btn quiet" disabled={state === 'sending'} onClick={() => void go({ kind: 'deny' })}>Deny</button>
-        <button class="btn answer" disabled={state === 'sending'} onClick={() => void go({ kind: 'allow' })}>Allow once</button>
+        <button class="btn quiet" disabled={busy} onClick={() => void go({ kind: 'deny' }, 'Denied')}>Deny</button>
+        <button class="btn answer" disabled={busy} onClick={() => void go({ kind: 'allow' }, 'Allowed once')}>{say('Allow once')}</button>
       </div>
     </div>
   )

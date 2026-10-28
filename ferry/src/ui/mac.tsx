@@ -30,7 +30,7 @@ export function MacScreen() {
           <div>
             <dt>Link</dt>
             <dd>
-              <span class={`state${link.kind === 'live' ? ' working' : ''}`}><i class="dot" />{linkText}</span>
+              <span class={`live-dot${link.kind === 'live' ? '' : ' off'}`}><i />{linkText}</span>
             </dd>
           </div>
           {link.kind === 'live' && link.sas ? (

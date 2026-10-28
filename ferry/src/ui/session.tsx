@@ -9,7 +9,7 @@ export function SessionScreen({ id, mode }: { id: string; mode: 'chat' | 'term' 
   const { snap } = useSnapshot()
   const s = findSession(snap, id)
   const project = snap?.shelves.find((sh) => sh.id === s?.projectId)
-  const sub = s ? [s.agent ?? 'Shell', project?.name, s.state === 'needs' ? 'waiting on you' : s.state === 'working' ? 'working' : null].filter(Boolean).join(' · ') : ''
+  const sub = s ? [s.agent ?? 'Shell', project?.name, s.state === 'working' ? 'working' : null].filter(Boolean).join(' · ') : ''
   return (
     <section class="screen on">
       <header class="topbar sess-head">
@@ -22,6 +22,7 @@ export function SessionScreen({ id, mode }: { id: string; mode: 'chat' | 'term' 
             {s?.title ?? 'Session'}
             <small>{sub}</small>
           </h1>
+          {s?.state === 'needs' ? <span class="tab">{s.ask === 'plan' ? 'Plan' : s.ask === 'ask' ? 'Ask' : 'Allow?'}</span> : null}
         </div>
         <div class="seg" role="tablist">
           <a role="tab" href={href.session(id, 'chat')} aria-selected={mode === 'chat'}>

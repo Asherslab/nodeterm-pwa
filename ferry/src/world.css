@@ -101,7 +101,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .tabbar button { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; font: 500 11px/1 var(--ui); padding: 6px 0; min-height: 48px; position: relative; }
 .tabbar button[aria-current='page'] { color: var(--frame-ink); }
 .tabbar button[aria-current='page']::before { content: ''; position: absolute; top: -6px; width: 28px; height: 3px; border-radius: 0 0 3px 3px; background: var(--frame-ink); }
-.tabbar .count { position: absolute; top: 2px; left: calc(50% + 8px); font: 700 10px/16px var(--ui); min-width: 16px; padding: 0 4px; border-radius: 8px; background: var(--tab); color: var(--tab-ink); }
+.tabbar .count { position: absolute; top: 3px; left: calc(50% + 10px); font: 700 10px/15px var(--ui); min-width: 18px; padding: 0 5px; border-radius: 4px 2px 2px 4px; background: var(--tab); color: var(--tab-ink); text-align: center; }
 
 /* ---- shelf labels + rows (the pigeonholes) ---------------------------------------------- */
 .shelf { margin: 18px 16px 6px; display: flex; align-items: baseline; gap: 8px; }
@@ -120,12 +120,14 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .row.needs { padding-right: 70px; }
 
 /* designator: a brass label-holder plate, identical wherever the session appears */
-.plate { grid-row: 1 / span 2; align-self: start; margin-top: 1px; font: 700 12px/1 var(--label); letter-spacing: .04em; color: var(--brass-ink); background: var(--brass); padding: 5px 6px 4px; border-radius: 3px; box-shadow: inset 0 -1px 0 rgb(0 0 0 / .18), inset 0 1px 0 rgb(255 255 255 / .35); white-space: nowrap; }
+.plate { grid-row: 1 / span 2; align-self: start; margin-top: 1px; font: 700 12px/1 var(--label); letter-spacing: .04em; color: var(--brass-ink); background: var(--brass); padding: 5px 6px 4px; border-radius: 3px; white-space: nowrap; }
 .plate.lg { font-size: 14px; padding: 6px 8px 5px; }
 
 /* THE TAB — the signature move. A needs-you session pushes a vermilion index tab out past the
    right edge of its slot, so the right edge of any list is the queue. */
-.tab { position: absolute; right: -7px; top: 50%; translate: 0 -50%; min-width: 58px; height: 26px; padding: 0 9px 0 10px; display: inline-flex; align-items: center; justify-content: center; gap: 4px; background: var(--tab); color: var(--tab-ink); font: 700 11px/1 var(--ui); letter-spacing: .06em; text-transform: uppercase; border-radius: 6px 3px 3px 6px; box-shadow: 0 3px 8px -3px rgb(0 0 0 / .45); }
+.tab { position: absolute; right: -7px; top: 50%; translate: 0 -50%; min-width: 58px; height: 26px; padding: 0 9px 0 10px; display: inline-flex; align-items: center; justify-content: center; gap: 4px; background: var(--tab); color: var(--tab-ink); font: 700 11px/1 var(--ui); letter-spacing: .06em; text-transform: uppercase; border-radius: 6px 3px 3px 6px; box-shadow: 0 3px 8px -3px rgb(0 0 0 / .45); animation: tab-out 420ms cubic-bezier(.16, 1, .3, 1) both; }
+@keyframes tab-out { from { translate: -34px -50%; opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .tab { animation: none; } }
 .tab::after { content: ''; position: absolute; right: 0; bottom: -4px; border: 2px solid transparent; border-top-color: color-mix(in srgb, var(--tab) 55%, #000); border-left-color: color-mix(in srgb, var(--tab) 55%, #000); }
 .tab.done { background: transparent; color: var(--ink-2); box-shadow: inset 0 0 0 1.5px var(--rule-strong); }
 .tab.done::after { display: none; }

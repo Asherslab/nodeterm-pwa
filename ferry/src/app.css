@@ -67,7 +67,7 @@ textarea.field:focus-visible { box-shadow: inset 0 0 0 2px var(--focus); }
 .facts dd { margin: 0; text-align: right; }
 .facts select { font: inherit; color: var(--ink); background: var(--slot-2); border: 0; border-radius: 8px; min-height: 36px; padding: 0 8px; }
 .facts code { font: 400 12.5px/1.3 var(--code); }
-.btn.danger { color: var(--tab); }
+.btn.danger { color: var(--ink); }
 .fine { margin: 4px 2px; font-size: 12.5px; line-height: 1.45; color: var(--ink-3); }
 
 /* pairing */
@@ -80,3 +80,21 @@ textarea.field:focus-visible { box-shadow: inset 0 0 0 2px var(--focus); }
 .tool .arg { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
 .ask .md-h { font-weight: 700; font-size: 15px; margin: 8px 0 2px; }
 .pair .pair-error { color: var(--tab); font-weight: 600; }
+
+.btn[disabled] { opacity: .45; cursor: default; }
+.btn.answer[disabled] { background: color-mix(in srgb, var(--tab) 35%, var(--slot)); color: var(--ink); opacity: 1; }
+.ask h3 { margin-top: 14px; }
+.receipt { display: flex; align-items: center; gap: 8px; align-self: stretch; padding: 10px 14px; border-radius: 12px; background: var(--slot); box-shadow: inset 0 0 0 1px var(--rule); font: 500 13px/1.35 var(--ui); color: var(--ink-2); }
+.receipt b { color: var(--ink); font-weight: 600; }
+.live-dot { display: inline-flex; align-items: center; gap: 7px; }
+.live-dot i { width: 8px; height: 8px; border-radius: 50%; background: var(--work); }
+.live-dot.off i { background: transparent; box-shadow: inset 0 0 0 1.5px var(--ink-3); }
+.sess-head .tab { position: static; translate: none; flex: none; animation: none; }
+.sess-head .tab::after { display: none; }
+
+.sess-head h1 { min-width: 0; flex: 1; }
+.sess-head h1 small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* The time in state sits at the end of its own duration rule, so the right column never crowds the subline. */
+.dur { height: 14px; }
+.dur-t { position: absolute; left: calc(var(--w) + 6px); top: 0; font: 500 11px/14px var(--ui); color: var(--work); background: var(--slot); padding-right: 4px; }
+.row .meta { min-width: 0; }

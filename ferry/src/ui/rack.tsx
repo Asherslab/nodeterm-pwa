@@ -5,7 +5,8 @@ import { Icon } from './icons'
 
 const TAB_LABEL = { plan: 'Plan', ask: 'Ask', allow: 'Allow?', needs: 'You' } as const
 
-export function StateLine({ s }: { s: Session }) {
+export function StateLine({ s, short }: { s: Session; short?: boolean }) {
+  if (s.state === 'working' && short) return <span class="state working"><i class="dot" />{s.stale ? 'Working?' : 'Working'}</span>
   if (s.state === 'working')
     return (
       <span class="state working">
@@ -30,12 +31,15 @@ export function Row({ s }: { s: Session }) {
       <span class="title">{s.title}</span>
       {flagged ? null : (
         <span class="meta">
-          <StateLine s={s} />
-          <span>{s.agent ?? 'Shell'}</span>
+          <StateLine s={s} short />
         </span>
       )}
-      <span class="sub">{flagged && s.agent ? `${s.agent} · ${s.line}` : s.line}</span>
-      {s.state === 'working' ? <span class={`dur${s.stale ? ' stale' : ''}`} style={{ '--w': `${durWidth(s.since)}%` }} /> : null}
+      <span class="sub">{s.agent ? `${s.agent} · ${s.line}` : s.line}</span>
+      {s.state === 'working' ? (
+        <span class={`dur${s.stale ? ' stale' : ''}`} style={{ '--w': `${durWidth(s.since)}%` }}>
+          {s.since ? <span class="dur-t tnum">{ago(s.since)}</span> : null}
+        </span>
+      ) : null}
       {s.state === 'needs' ? <span class="tab">{TAB_LABEL[s.ask ?? 'needs']}</span> : s.unread ? <span class="tab done">New</span> : null}
     </a>
   )

@@ -143,7 +143,7 @@ export function parseProjects(blob: string, now = Date.now()): Snapshot {
         line = ev?.title || (m.state === 'blocked' ? 'Blocked: needs you' : 'Waiting for you')
       } else if (m.hibernated) {
         state = 'asleep'
-        line = 'Asleep · wakes when opened'
+        line = 'Wakes when opened'
       } else if (m.state === 'working') {
         state = 'working'
         line = [info.activity, info.tool].filter(Boolean).join(' · ') || 'Working'
