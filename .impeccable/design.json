@@ -1,0 +1,820 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-28T06:16:18+00:00",
+  "title": "Design System: Ferry",
+  "extensions": {
+    "colorMeta": {
+      "frame": {
+        "role": "primary",
+        "displayName": "Enamel Frame Green",
+        "tonalRamp": [
+          "#010e0c",
+          "#0f2a27",
+          "#254a44",
+          "#406b64",
+          "#618c85",
+          "#83b0a8",
+          "#acd3cc",
+          "#d8f6f1"
+        ],
+        "canonical": "#1f4a44"
+      },
+      "frame-raised": {
+        "role": "primary",
+        "displayName": "Raised Enamel",
+        "tonalRamp": [
+          "#000f0c",
+          "#0a2b27",
+          "#1f4b45",
+          "#396c65",
+          "#5b8e86",
+          "#7db1a9",
+          "#a7d4cc",
+          "#d4f7f1"
+        ],
+        "canonical": "#2a5d56"
+      },
+      "frame-ink": {
+        "role": "primary",
+        "displayName": "Frame Ink",
+        "tonalRamp": [
+          "#090c0b",
+          "#222624",
+          "#3e4441",
+          "#5c6360",
+          "#7d8481",
+          "#a0a7a3",
+          "#c4cbc8",
+          "#ebf0ed"
+        ],
+        "canonical": "#eaf2ee"
+      },
+      "frame-ink-muted": {
+        "role": "primary",
+        "displayName": "Frame Ink Muted",
+        "tonalRamp": [
+          "#070d0a",
+          "#1e2724",
+          "#384540",
+          "#56655f",
+          "#768780",
+          "#98aaa3",
+          "#becdc7",
+          "#e6f2ed"
+        ],
+        "canonical": "#c6d8d1"
+      },
+      "ground": {
+        "role": "neutral",
+        "displayName": "Steel Ground",
+        "tonalRamp": [
+          "#0a0c0a",
+          "#242623",
+          "#40433f",
+          "#5f625d",
+          "#80847e",
+          "#a3a6a1",
+          "#c7cac5",
+          "#edefeb"
+        ],
+        "canonical": "#e6eae4"
+      },
+      "slot": {
+        "role": "neutral",
+        "displayName": "Slot",
+        "tonalRamp": [
+          "#0b0b0a",
+          "#252523",
+          "#424240",
+          "#61625e",
+          "#82837f",
+          "#a4a5a2",
+          "#c9c9c6",
+          "#eeefec"
+        ],
+        "canonical": "#f7f8f4"
+      },
+      "slot-recessed": {
+        "role": "neutral",
+        "displayName": "Recessed Slot",
+        "tonalRamp": [
+          "#0b0b0a",
+          "#242623",
+          "#41433f",
+          "#60625e",
+          "#81837f",
+          "#a3a6a1",
+          "#c7cac6",
+          "#edefec"
+        ],
+        "canonical": "#eef1ec"
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "tonalRamp": [
+          "#090c0b",
+          "#222625",
+          "#3e4441",
+          "#5c6361",
+          "#7d8482",
+          "#9fa7a4",
+          "#c4cbc8",
+          "#eaf0ee"
+        ],
+        "canonical": "#161c1a"
+      },
+      "ink-secondary": {
+        "role": "neutral",
+        "displayName": "Ink Secondary",
+        "tonalRamp": [
+          "#080c0b",
+          "#202724",
+          "#3a4541",
+          "#586460",
+          "#798681",
+          "#9ba9a4",
+          "#c0ccc8",
+          "#e7f1ee"
+        ],
+        "canonical": "#4a5652"
+      },
+      "ink-tertiary": {
+        "role": "neutral",
+        "displayName": "Ink Tertiary",
+        "tonalRamp": [
+          "#080c0b",
+          "#202725",
+          "#3b4541",
+          "#586460",
+          "#798681",
+          "#9ba8a4",
+          "#c1ccc8",
+          "#e8f1ee"
+        ],
+        "canonical": "#5c6864"
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Rule",
+        "tonalRamp": [
+          "#090c0a",
+          "#222623",
+          "#3e443f",
+          "#5c635e",
+          "#7d847f",
+          "#a0a7a2",
+          "#c4cbc6",
+          "#ebf0ec"
+        ],
+        "canonical": "#c9d1cb"
+      },
+      "rule-strong": {
+        "role": "neutral",
+        "displayName": "Rule Strong",
+        "tonalRamp": [
+          "#080c0a",
+          "#202724",
+          "#3b4440",
+          "#59645f",
+          "#7a8680",
+          "#9ca8a2",
+          "#c1ccc7",
+          "#e8f1ed"
+        ],
+        "canonical": "#9eaaa4"
+      },
+      "brass": {
+        "role": "secondary",
+        "displayName": "Brass",
+        "tonalRamp": [
+          "#140900",
+          "#312200",
+          "#543e01",
+          "#7b5c04",
+          "#a07c26",
+          "#c4a04d",
+          "#e5c581",
+          "#ffedc7"
+        ],
+        "canonical": "#c9a452"
+      },
+      "brass-ink": {
+        "role": "secondary",
+        "displayName": "Brass Ink",
+        "tonalRamp": [
+          "#0d0b06",
+          "#28251c",
+          "#464236",
+          "#676153",
+          "#888273",
+          "#aba595",
+          "#cec9bb",
+          "#f3eee3"
+        ],
+        "canonical": "#1f1a0e"
+      },
+      "tab": {
+        "role": "tertiary",
+        "displayName": "Signal Vermilion",
+        "tonalRamp": [
+          "#220000",
+          "#4d0200",
+          "#7e0d00",
+          "#b22004",
+          "#da4b32",
+          "#ff755b",
+          "#fdb5a6",
+          "#fde9e5"
+        ],
+        "canonical": "#c93a22"
+      },
+      "tab-ink": {
+        "role": "tertiary",
+        "displayName": "Tab Ink",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ],
+        "canonical": "#ffffff"
+      },
+      "work": {
+        "role": "tertiary",
+        "displayName": "Working Green",
+        "tonalRamp": [
+          "#00100b",
+          "#002d25",
+          "#0f4d42",
+          "#2b6e61",
+          "#4f9182",
+          "#72b4a5",
+          "#9ed7c9",
+          "#cdfaef"
+        ],
+        "canonical": "#276b5e"
+      },
+      "term-bg": {
+        "role": "neutral",
+        "displayName": "Terminal Night",
+        "tonalRamp": [
+          "#090c0c",
+          "#212627",
+          "#3c4344",
+          "#5b6364",
+          "#7b8485",
+          "#9ea7a8",
+          "#c3cbcc",
+          "#e9f0f1"
+        ],
+        "canonical": "#12191a"
+      },
+      "term-ink": {
+        "role": "neutral",
+        "displayName": "Terminal Ink",
+        "tonalRamp": [
+          "#090c0a",
+          "#212724",
+          "#3c4440",
+          "#5a645f",
+          "#7b8580",
+          "#9ea8a2",
+          "#c2ccc7",
+          "#e9f1ec"
+        ],
+        "canonical": "#d7e2dc"
+      },
+      "frame-dark": {
+        "role": "primary",
+        "displayName": "Enamel Frame Green (dark)",
+        "tonalRamp": [
+          "#050d0c",
+          "#1a2826",
+          "#334743",
+          "#4f6763",
+          "#708884",
+          "#92aba7",
+          "#b8cfcb",
+          "#e1f3f0"
+        ],
+        "canonical": "#0e2421"
+      },
+      "frame-raised-dark": {
+        "role": "primary",
+        "displayName": "Raised Enamel (dark)",
+        "tonalRamp": [
+          "#030e0c",
+          "#162927",
+          "#2d4844",
+          "#496864",
+          "#698a85",
+          "#8bada8",
+          "#b3d0cc",
+          "#ddf4f0"
+        ],
+        "canonical": "#173632"
+      },
+      "frame-ink-dark": {
+        "role": "primary",
+        "displayName": "Frame Ink (dark)",
+        "tonalRamp": [
+          "#090c0b",
+          "#212625",
+          "#3c4441",
+          "#5a6460",
+          "#7b8581",
+          "#9da8a4",
+          "#c2ccc8",
+          "#e9f0ee"
+        ],
+        "canonical": "#e3eeea"
+      },
+      "frame-ink-muted-dark": {
+        "role": "primary",
+        "displayName": "Frame Ink Muted (dark)",
+        "tonalRamp": [
+          "#050d0b",
+          "#1a2924",
+          "#334741",
+          "#4f6760",
+          "#708981",
+          "#92aca4",
+          "#b8cfc8",
+          "#e1f3ee"
+        ],
+        "canonical": "#8fa9a1"
+      },
+      "ground-dark": {
+        "role": "neutral",
+        "displayName": "Steel Ground (dark)",
+        "tonalRamp": [
+          "#090c0b",
+          "#222625",
+          "#3d4342",
+          "#5c6362",
+          "#7c8483",
+          "#9fa7a6",
+          "#c4cbca",
+          "#eaf0ef"
+        ],
+        "canonical": "#0f1514"
+      },
+      "slot-dark": {
+        "role": "neutral",
+        "displayName": "Slot (dark)",
+        "tonalRamp": [
+          "#080c0c",
+          "#202726",
+          "#3b4443",
+          "#586463",
+          "#798584",
+          "#9ba8a7",
+          "#c1cccb",
+          "#e8f1f0"
+        ],
+        "canonical": "#172120"
+      },
+      "slot-recessed-dark": {
+        "role": "neutral",
+        "displayName": "Recessed Slot (dark)",
+        "tonalRamp": [
+          "#070c0b",
+          "#1f2726",
+          "#3a4543",
+          "#576562",
+          "#788683",
+          "#9aa9a6",
+          "#bfccca",
+          "#e7f1ef"
+        ],
+        "canonical": "#1d2927"
+      },
+      "ink-dark": {
+        "role": "neutral",
+        "displayName": "Ink (dark)",
+        "tonalRamp": [
+          "#0a0c0a",
+          "#222624",
+          "#3e4341",
+          "#5d635f",
+          "#7e8480",
+          "#a0a7a3",
+          "#c5cbc7",
+          "#ebf0ed"
+        ],
+        "canonical": "#e7eeea"
+      },
+      "ink-secondary-dark": {
+        "role": "neutral",
+        "displayName": "Ink Secondary (dark)",
+        "tonalRamp": [
+          "#070d0b",
+          "#1f2724",
+          "#394541",
+          "#566560",
+          "#778681",
+          "#99a9a3",
+          "#bfcdc8",
+          "#e6f1ed"
+        ],
+        "canonical": "#a3b3ad"
+      },
+      "ink-tertiary-dark": {
+        "role": "neutral",
+        "displayName": "Ink Tertiary (dark)",
+        "tonalRamp": [
+          "#070d0b",
+          "#1e2724",
+          "#384541",
+          "#556560",
+          "#768781",
+          "#98aaa3",
+          "#becdc8",
+          "#e5f2ed"
+        ],
+        "canonical": "#82938d"
+      },
+      "rule-dark": {
+        "role": "neutral",
+        "displayName": "Rule (dark)",
+        "tonalRamp": [
+          "#070c0b",
+          "#1f2725",
+          "#394542",
+          "#576561",
+          "#778682",
+          "#9aa9a5",
+          "#bfcdc9",
+          "#e6f1ef"
+        ],
+        "canonical": "#2a3734"
+      },
+      "rule-strong-dark": {
+        "role": "neutral",
+        "displayName": "Rule Strong (dark)",
+        "tonalRamp": [
+          "#070d0b",
+          "#1e2725",
+          "#384542",
+          "#556561",
+          "#758782",
+          "#98aaa5",
+          "#bdcdc9",
+          "#e5f2ee"
+        ],
+        "canonical": "#43534f"
+      },
+      "brass-dark": {
+        "role": "secondary",
+        "displayName": "Brass (dark)",
+        "tonalRamp": [
+          "#140900",
+          "#322200",
+          "#553e04",
+          "#7b5c0a",
+          "#9f7d30",
+          "#c3a055",
+          "#e4c586",
+          "#feedca"
+        ],
+        "canonical": "#b8954a"
+      },
+      "brass-ink-dark": {
+        "role": "secondary",
+        "displayName": "Brass Ink (dark)",
+        "tonalRamp": [
+          "#0d0b07",
+          "#28251e",
+          "#464238",
+          "#666156",
+          "#878276",
+          "#aaa599",
+          "#cdc9be",
+          "#f2eee6"
+        ],
+        "canonical": "#17130a"
+      },
+      "tab-dark": {
+        "role": "tertiary",
+        "displayName": "Signal Vermilion (dark)",
+        "tonalRamp": [
+          "#230000",
+          "#4c0400",
+          "#7c1401",
+          "#b22001",
+          "#de462a",
+          "#ff755a",
+          "#ffb4a4",
+          "#fee9e4"
+        ],
+        "canonical": "#f0573b"
+      },
+      "tab-ink-dark": {
+        "role": "tertiary",
+        "displayName": "Tab Ink (dark)",
+        "tonalRamp": [
+          "#110907",
+          "#2f211d",
+          "#503d37",
+          "#725b54",
+          "#947c75",
+          "#b89f97",
+          "#dac3bd",
+          "#fceae5"
+        ],
+        "canonical": "#1a0905"
+      },
+      "work-dark": {
+        "role": "tertiary",
+        "displayName": "Working Green (dark)",
+        "tonalRamp": [
+          "#00100b",
+          "#012c25",
+          "#074d42",
+          "#097162",
+          "#2c9583",
+          "#56b9a6",
+          "#8adcca",
+          "#bffeef"
+        ],
+        "canonical": "#5fc2ae"
+      },
+      "term-bg-dark": {
+        "role": "neutral",
+        "displayName": "Terminal Night (dark)",
+        "tonalRamp": [
+          "#090c0c",
+          "#222626",
+          "#3e4343",
+          "#5c6363",
+          "#7d8484",
+          "#a0a7a7",
+          "#c4caca",
+          "#ebf0ef"
+        ],
+        "canonical": "#0a0f0f"
+      },
+      "live": {
+        "role": "tertiary",
+        "displayName": "Live Signal",
+        "tonalRamp": [
+          "#001009",
+          "#002d22",
+          "#084e3d",
+          "#11725b",
+          "#3f947b",
+          "#64b89e",
+          "#94dac3",
+          "#c6fce9"
+        ],
+        "canonical": "#7fd3b8"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Pairing screen headings only."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Top bar Mac or session name."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Slot row titles (14px on board cards)."
+      },
+      "title-ask": {
+        "displayName": "Ask Title",
+        "purpose": "The ask card's question and empty-state titles."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Agent prose, user bubbles, pairing copy (1.5 line height in chat)."
+      },
+      "body-small": {
+        "displayName": "Subline",
+        "purpose": "Row sublines, banners, notes; single line with ellipsis in rows."
+      },
+      "tab-label": {
+        "displayName": "Tab Label",
+        "purpose": "Uppercase word on a needs-you or NEW tab."
+      },
+      "label": {
+        "displayName": "Typewriter Label",
+        "purpose": "Project shelf names and board column heads, uppercase."
+      },
+      "plate": {
+        "displayName": "Designator",
+        "purpose": "Brass plate designators (14px on the large plate)."
+      },
+      "code": {
+        "displayName": "Code",
+        "purpose": "Inline code, tool chips, code blocks, keys and fingerprints."
+      },
+      "terminal": {
+        "displayName": "Terminal",
+        "purpose": "xterm.js terminal text."
+      }
+    },
+    "shadows": [
+      {
+        "name": "slot",
+        "value": "0 6px 18px -8px rgb(22 28 26 / 0.35)",
+        "purpose": "Every slot group, card and sheet (light theme)."
+      },
+      {
+        "name": "slot-dark",
+        "value": "0 8px 22px -10px rgb(0 0 0 / 0.7)",
+        "purpose": "Every slot group, card and sheet (dark theme)."
+      },
+      {
+        "name": "tab-cast",
+        "value": "0 3px 8px -3px rgb(0 0 0 / .45)",
+        "purpose": "The needs-you tab only, pushed out over the slot edge."
+      },
+      {
+        "name": "ask-ring",
+        "value": "inset 0 0 0 1.5px var(--tab)",
+        "purpose": "Vermilion ring of an open ask card, combined with the slot shadow."
+      },
+      {
+        "name": "hairline-inset",
+        "value": "inset 0 0 0 1px var(--rule)",
+        "purpose": "Quiet buttons, bubbles, tool chips, receipts."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out-expo",
+        "value": "cubic-bezier(.16, 1, .3, 1)",
+        "purpose": "Screen slides and the tab slide-out."
+      },
+      {
+        "name": "screen-slide",
+        "value": "260ms, translateX 14px (−14px going back), opacity from .6",
+        "purpose": "Screen entry; none under reduced motion."
+      },
+      {
+        "name": "tab-out",
+        "value": "420ms, from translate -34px and opacity 0",
+        "purpose": "The tab sliding out past the slot edge; none under reduced motion."
+      },
+      {
+        "name": "working-spin",
+        "value": "1.1s linear infinite",
+        "purpose": "The open ring of a working state line; none under reduced motion."
+      }
+    ],
+    "breakpoints": []
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Neutral commit: ink slab, 44px.",
+      "html": "<button class=\"ds-btn ds-btn-primary\">Add the default board</button>",
+      "css": ":host{--frame:#1f4a44;--frame-2:#2a5d56;--frame-ink:#eaf2ee;--frame-ink-2:#c6d8d1;--ground:#e6eae4;--slot:#f7f8f4;--slot-2:#eef1ec;--ink:#161c1a;--ink-2:#4a5652;--ink-3:#5c6864;--rule:#c9d1cb;--rule-strong:#9eaaa4;--brass:#c9a452;--brass-ink:#1f1a0e;--tab:#c93a22;--tab-ink:#fff;--live:#7fd3b8;--work:#276b5e;--focus:#276b5e;--shadow:0 6px 18px -8px rgb(22 28 26 / .35)} .ds-btn{min-height:44px;padding:0 16px;border-radius:12px;font:600 15px/1 -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;cursor:pointer} .ds-btn-primary{background:var(--ink);color:var(--slot)} .ds-btn:active{opacity:.85} .ds-btn:focus-visible{outline:2px solid var(--focus);outline-offset:2px}"
+    },
+    {
+      "name": "Answer Button",
+      "kind": "button",
+      "refersTo": "button-answer",
+      "description": "The vermilion answer, only inside an ask card.",
+      "html": "<button class=\"ds-btn ds-btn-answer\">Approve · keep current mode</button>",
+      "css": ":host{--frame:#1f4a44;--frame-2:#2a5d56;--frame-ink:#eaf2ee;--frame-ink-2:#c6d8d1;--ground:#e6eae4;--slot:#f7f8f4;--slot-2:#eef1ec;--ink:#161c1a;--ink-2:#4a5652;--ink-3:#5c6864;--rule:#c9d1cb;--rule-strong:#9eaaa4;--brass:#c9a452;--brass-ink:#1f1a0e;--tab:#c93a22;--tab-ink:#fff;--live:#7fd3b8;--work:#276b5e;--focus:#276b5e;--shadow:0 6px 18px -8px rgb(22 28 26 / .35)} .ds-btn{min-height:44px;padding:0 16px;border-radius:12px;font:600 15px/1 -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;cursor:pointer} .ds-btn-answer{background:var(--tab);color:var(--tab-ink)} .ds-btn-answer:active{opacity:.85} .ds-btn-answer:focus-visible{outline:2px solid var(--focus);outline-offset:2px} .ds-btn-answer[disabled]{background:color-mix(in srgb,var(--tab) 35%,var(--slot));color:var(--ink)}"
+    },
+    {
+      "name": "Quiet Button",
+      "kind": "button",
+      "refersTo": "button-quiet",
+      "description": "Secondary answers and sheet actions: recessed slot with a hairline inset.",
+      "html": "<button class=\"ds-btn ds-btn-quiet\">Deny</button>",
+      "css": ":host{--frame:#1f4a44;--frame-2:#2a5d56;--frame-ink:#eaf2ee;--frame-ink-2:#c6d8d1;--ground:#e6eae4;--slot:#f7f8f4;--slot-2:#eef1ec;--ink:#161c1a;--ink-2:#4a5652;--ink-3:#5c6864;--rule:#c9d1cb;--rule-strong:#9eaaa4;--brass:#c9a452;--brass-ink:#1f1a0e;--tab:#c93a22;--tab-ink:#fff;--live:#7fd3b8;--work:#276b5e;--focus:#276b5e;--shadow:0 6px 18px -8px rgb(22 28 26 / .35)} .ds-btn{min-height:44px;padding:0 16px;border-radius:12px;font:600 15px/1 -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;display:inline-flex;align-items:center;justify-content:center;border:0;cursor:pointer} .ds-btn-quiet{background:var(--slot-2);color:var(--ink);box-shadow:inset 0 0 0 1px var(--rule)} .ds-btn-quiet:active{background:var(--rule)} .ds-btn-quiet:focus-visible{outline:2px solid var(--focus);outline-offset:2px}"
+    },
+    {
+      "name": "Slot Row with Tab",
+      "kind": "custom",
+      "refersTo": "slot-row",
+      "description": "The signature: a slot with its brass plate and a vermilion needs-you tab pushed 7px past the right edge, with its fold and slide-out.",
+      "html": "<div class=\"ds-slots\"><a class=\"ds-row ds-needs\" href=\"#\"><span class=\"ds-plate\">PAN·1</span><span class=\"ds-title\">Costco receipt parser</span><span class=\"ds-sub\">Claude · Plan ready · 6 steps</span><span class=\"ds-tab\">Plan</span></a><a class=\"ds-row\" href=\"#\"><span class=\"ds-plate\">PAN·2</span><span class=\"ds-title\">Offline op-log merge</span><span class=\"ds-sub\">Codex · Running tests</span><span class=\"ds-dur\" style=\"--w:40%\"><span class=\"ds-dur-t\">12m</span></span></a></div>",
+      "css": ":host{--frame:#1f4a44;--frame-2:#2a5d56;--frame-ink:#eaf2ee;--frame-ink-2:#c6d8d1;--ground:#e6eae4;--slot:#f7f8f4;--slot-2:#eef1ec;--ink:#161c1a;--ink-2:#4a5652;--ink-3:#5c6864;--rule:#c9d1cb;--rule-strong:#9eaaa4;--brass:#c9a452;--brass-ink:#1f1a0e;--tab:#c93a22;--tab-ink:#fff;--live:#7fd3b8;--work:#276b5e;--focus:#276b5e;--shadow:0 6px 18px -8px rgb(22 28 26 / .35)} .ds-slots{background:var(--slot);border-radius:14px;box-shadow:var(--shadow);margin:8px 16px;font:400 15px/1.4 -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;color:var(--ink)} .ds-row{position:relative;display:grid;grid-template-columns:auto 1fr;gap:4px 12px;align-items:center;padding:12px 14px;min-height:64px;text-decoration:none;color:inherit} .ds-row+.ds-row{border-top:1px solid var(--rule)} .ds-row:active{background:var(--slot-2)} .ds-row:focus-visible{outline:2px solid var(--focus);outline-offset:2px} .ds-needs{padding-right:70px} .ds-plate{grid-row:1/span 2;align-self:start;margin-top:1px;font:700 12px/1 'Courier Prime', ui-monospace, monospace;letter-spacing:.04em;color:var(--brass-ink);background:var(--brass);padding:5px 6px 4px;border-radius:3px} .ds-title{font:600 15px/1.25 -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif} .ds-sub{grid-column:2;font:400 13px/1.3 -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;color:var(--ink-2)} .ds-tab{position:absolute;right:-7px;top:50%;translate:0 -50%;min-width:58px;height:26px;padding:0 9px 0 10px;display:inline-flex;align-items:center;justify-content:center;background:var(--tab);color:var(--tab-ink);font:700 11px/1 -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;letter-spacing:.06em;text-transform:uppercase;border-radius:6px 3px 3px 6px;box-shadow:0 3px 8px -3px rgb(0 0 0/.45);animation:ds-tab-out 420ms cubic-bezier(.16,1,.3,1) both} .ds-tab::after{content:'';position:absolute;right:0;bottom:-4px;border:2px solid transparent;border-top-color:color-mix(in srgb,var(--tab) 55%,#000);border-left-color:color-mix(in srgb,var(--tab) 55%,#000)} @keyframes ds-tab-out{from{translate:-34px -50%;opacity:0}} @media (prefers-reduced-motion:reduce){.ds-tab{animation:none}} .ds-dur{grid-column:2;height:14px;position:relative} .ds-dur::before{content:'';position:absolute;left:0;top:4px;height:2px;width:var(--w);background:var(--work);border-radius:1px} .ds-dur-t{position:absolute;left:calc(var(--w) + 6px);top:0;font:500 11px/14px -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;color:var(--work);background:var(--slot);padding-right:4px;font-variant-numeric:tabular-nums}"
+    },
+    {
+      "name": "Designator Plate",
+      "kind": "chip",
+      "refersTo": "plate",
+      "description": "Flat brass label-holder plate in Courier Prime; identical wherever the session appears.",
+      "html": "<span class=\"ds-plate\">STA·1</span> <span class=\"ds-plate ds-lg\">PAN·1</span>",
+      "css": ":host{--frame:#1f4a44;--frame-2:#2a5d56;--frame-ink:#eaf2ee;--frame-ink-2:#c6d8d1;--ground:#e6eae4;--slot:#f7f8f4;--slot-2:#eef1ec;--ink:#161c1a;--ink-2:#4a5652;--ink-3:#5c6864;--rule:#c9d1cb;--rule-strong:#9eaaa4;--brass:#c9a452;--brass-ink:#1f1a0e;--tab:#c93a22;--tab-ink:#fff;--live:#7fd3b8;--work:#276b5e;--focus:#276b5e;--shadow:0 6px 18px -8px rgb(22 28 26 / .35)} .ds-plate{display:inline-block;font:700 12px/1 'Courier Prime', ui-monospace, monospace;letter-spacing:.04em;color:var(--brass-ink);background:var(--brass);padding:5px 6px 4px;border-radius:3px;white-space:nowrap} .ds-lg{font-size:14px;padding:6px 8px 5px}"
+    },
+    {
+      "name": "Stale Duration Rule",
+      "kind": "custom",
+      "refersTo": "slot-row",
+      "description": "Working time as rule length; hatched when the status is stale.",
+      "html": "<div class=\"ds-wrap\"><span class=\"ds-dur\" style=\"--w:55%\"></span><span class=\"ds-dur ds-stale\" style=\"--w:55%\"></span></div>",
+      "css": ":host{--frame:#1f4a44;--frame-2:#2a5d56;--frame-ink:#eaf2ee;--frame-ink-2:#c6d8d1;--ground:#e6eae4;--slot:#f7f8f4;--slot-2:#eef1ec;--ink:#161c1a;--ink-2:#4a5652;--ink-3:#5c6864;--rule:#c9d1cb;--rule-strong:#9eaaa4;--brass:#c9a452;--brass-ink:#1f1a0e;--tab:#c93a22;--tab-ink:#fff;--live:#7fd3b8;--work:#276b5e;--focus:#276b5e;--shadow:0 6px 18px -8px rgb(22 28 26 / .35)} .ds-wrap{display:grid;gap:10px;padding:16px;background:var(--slot);width:240px} .ds-dur{height:10px;position:relative;display:block} .ds-dur::before{content:'';position:absolute;left:0;top:4px;height:2px;width:var(--w);background:var(--work);border-radius:1px} .ds-dur::after{content:'';position:absolute;left:0;right:0;top:5px;border-top:1px dotted var(--rule-strong);z-index:-1} .ds-stale::before{background:repeating-linear-gradient(135deg,var(--ink-3) 0 2px,transparent 2px 5px);height:4px;top:3px}"
+    },
+    {
+      "name": "Segmented Filter",
+      "kind": "nav",
+      "refersTo": "segmented",
+      "description": "All / Need you / Working on the enamel frame.",
+      "html": "<div class=\"ds-frame\"><div class=\"ds-seg\" role=\"tablist\"><a role=\"tab\" aria-selected=\"true\" href=\"#\">All <span>8</span></a><a role=\"tab\" href=\"#\">Need you <span>3</span></a><a role=\"tab\" href=\"#\">Working <span>2</span></a></div></div>",
+      "css": ":host{--frame:#1f4a44;--frame-2:#2a5d56;--frame-ink:#eaf2ee;--frame-ink-2:#c6d8d1;--ground:#e6eae4;--slot:#f7f8f4;--slot-2:#eef1ec;--ink:#161c1a;--ink-2:#4a5652;--ink-3:#5c6864;--rule:#c9d1cb;--rule-strong:#9eaaa4;--brass:#c9a452;--brass-ink:#1f1a0e;--tab:#c93a22;--tab-ink:#fff;--live:#7fd3b8;--work:#276b5e;--focus:#276b5e;--shadow:0 6px 18px -8px rgb(22 28 26 / .35)} .ds-frame{background:var(--frame);padding:12px 16px} .ds-seg{display:flex;background:var(--frame-2);border-radius:10px;padding:3px;gap:2px} .ds-seg a{flex:1;min-height:38px;border-radius:8px;font:600 13px/1 -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;color:var(--frame-ink-2);display:inline-flex;align-items:center;justify-content:center;gap:6px;text-decoration:none} .ds-seg a span{font-variant-numeric:tabular-nums;opacity:.8} .ds-seg a[aria-selected='true']{background:var(--frame-ink);color:var(--frame)} .ds-seg a:focus-visible{outline:2px solid var(--frame-ink);outline-offset:2px}"
+    },
+    {
+      "name": "Tab Bar",
+      "kind": "nav",
+      "refersTo": "tabbar",
+      "description": "Frame-green bottom navigation; the current item gets a hanging notch, Sessions carries the vermilion count notch.",
+      "html": "<nav class=\"ds-tabbar\"><a href=\"#\" aria-current=\"page\"><svg viewBox=\"0 0 24 24\"><path d=\"M3 4h18v16H3zM3 9.5h18M3 14.5h18M12 4v16\"/></svg>Sessions<span class=\"ds-count\">3</span></a><a href=\"#\"><svg viewBox=\"0 0 24 24\"><path d=\"M3 4h5v16H3zM10 4h5v10h-5zM17 4h4v13h-4z\"/></svg>Board</a><a href=\"#\"><svg viewBox=\"0 0 24 24\"><path d=\"M4 5h16v11H4zM2 19h20\"/></svg>Mac</a></nav>",
+      "css": ":host{--frame:#1f4a44;--frame-2:#2a5d56;--frame-ink:#eaf2ee;--frame-ink-2:#c6d8d1;--ground:#e6eae4;--slot:#f7f8f4;--slot-2:#eef1ec;--ink:#161c1a;--ink-2:#4a5652;--ink-3:#5c6864;--rule:#c9d1cb;--rule-strong:#9eaaa4;--brass:#c9a452;--brass-ink:#1f1a0e;--tab:#c93a22;--tab-ink:#fff;--live:#7fd3b8;--work:#276b5e;--focus:#276b5e;--shadow:0 6px 18px -8px rgb(22 28 26 / .35)} .ds-tabbar{display:flex;background:var(--frame);color:var(--frame-ink-2);padding:6px 8px 8px;border-top:1px solid rgb(0 0 0/.15)} .ds-tabbar a{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;font:500 11px/1 -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;padding:6px 0;min-height:48px;position:relative;color:inherit;text-decoration:none} .ds-tabbar svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round} .ds-tabbar a[aria-current='page']{color:var(--frame-ink)} .ds-tabbar a[aria-current='page']::before{content:'';position:absolute;top:-6px;width:28px;height:3px;border-radius:0 0 3px 3px;background:var(--frame-ink)} .ds-tabbar a:focus-visible{outline:2px solid var(--frame-ink);outline-offset:-2px} .ds-count{position:absolute;top:3px;left:calc(50% + 10px);font:700 10px/15px -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;min-width:18px;padding:0 5px;border-radius:4px 2px 2px 4px;background:var(--tab);color:var(--tab-ink);text-align:center;font-variant-numeric:tabular-nums}"
+    },
+    {
+      "name": "Ask Card",
+      "kind": "card",
+      "refersTo": "ask-card",
+      "description": "The answer surface: slot with a 1.5px vermilion inset ring, question, body, answer actions.",
+      "html": "<div class=\"ds-ask\"><h3>Allow Bash?</h3><div class=\"ds-body\"><div class=\"ds-cmd\">pio run -t upload</div></div><div class=\"ds-actions\"><button class=\"ds-btn ds-quiet\">Deny</button><button class=\"ds-btn ds-answer\">Allow once</button></div></div>",
+      "css": ":host{--frame:#1f4a44;--frame-2:#2a5d56;--frame-ink:#eaf2ee;--frame-ink-2:#c6d8d1;--ground:#e6eae4;--slot:#f7f8f4;--slot-2:#eef1ec;--ink:#161c1a;--ink-2:#4a5652;--ink-3:#5c6864;--rule:#c9d1cb;--rule-strong:#9eaaa4;--brass:#c9a452;--brass-ink:#1f1a0e;--tab:#c93a22;--tab-ink:#fff;--live:#7fd3b8;--work:#276b5e;--focus:#276b5e;--shadow:0 6px 18px -8px rgb(22 28 26 / .35)} .ds-ask{background:var(--slot);border-radius:16px;box-shadow:var(--shadow),inset 0 0 0 1.5px var(--tab);overflow:hidden;font:400 14px/1.5 -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;color:var(--ink);margin:12px} .ds-ask h3{margin:14px 14px 2px;font:700 17px/1.3 -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif} .ds-body{padding:0 14px 4px} .ds-cmd{font:400 13px/1.45 'JetBrains Mono',ui-monospace,monospace;background:#12191a;color:#d7e2dc;padding:10px 12px;border-radius:10px;margin:8px 0;white-space:pre-wrap} .ds-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px 14px 14px} .ds-btn{min-height:44px;padding:0 16px;border-radius:12px;font:600 15px/1 -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;border:0;cursor:pointer} .ds-btn:focus-visible{outline:2px solid var(--focus);outline-offset:2px} .ds-quiet{background:var(--slot-2);color:var(--ink);box-shadow:inset 0 0 0 1px var(--rule)} .ds-answer{background:var(--tab);color:var(--tab-ink)}"
+    },
+    {
+      "name": "Composer",
+      "kind": "input",
+      "refersTo": "composer-field",
+      "description": "Pill field and 44px ink send circle on the ground, padded for the home indicator.",
+      "html": "<div class=\"ds-composer\"><textarea class=\"ds-field\" rows=\"1\" placeholder=\"Message Claude\"></textarea><button class=\"ds-send\" aria-label=\"Send\"><svg viewBox=\"0 0 24 24\"><path d=\"M12 19V5M6 11l6-6 6 6\"/></svg></button></div>",
+      "css": ":host{--frame:#1f4a44;--frame-2:#2a5d56;--frame-ink:#eaf2ee;--frame-ink-2:#c6d8d1;--ground:#e6eae4;--slot:#f7f8f4;--slot-2:#eef1ec;--ink:#161c1a;--ink-2:#4a5652;--ink-3:#5c6864;--rule:#c9d1cb;--rule-strong:#9eaaa4;--brass:#c9a452;--brass-ink:#1f1a0e;--tab:#c93a22;--tab-ink:#fff;--live:#7fd3b8;--work:#276b5e;--focus:#276b5e;--shadow:0 6px 18px -8px rgb(22 28 26 / .35)} .ds-composer{display:flex;align-items:flex-end;gap:8px;padding:8px 12px 10px;background:var(--ground);border-top:1px solid var(--rule)} .ds-field{flex:1;min-height:44px;border-radius:22px;background:var(--slot);box-shadow:inset 0 0 0 1px var(--rule-strong);padding:12px 16px;font:400 16px/1.35 -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;color:var(--ink);border:0;resize:none;outline:none} .ds-field:focus-visible{box-shadow:inset 0 0 0 2px var(--focus)} .ds-send{width:44px;height:44px;border-radius:50%;background:var(--ink);color:var(--slot);display:grid;place-items:center;border:0;cursor:pointer} .ds-send svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round} .ds-send:focus-visible{outline:2px solid var(--focus);outline-offset:2px} .ds-send[disabled]{opacity:.35}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Sorting Frame",
+    "overview": "Ferry is a post-room frame of pigeonholes held in one hand. The shell (header, filter, tab bar) is the frame itself, enamelled green; the pale steel-grey ground behind it holds rounded groups of slots, one per session, built from hairlines and a single soft shadow. Every session carries a brass label-holder plate stamped with a typewriter designator (`PAN·1`), and the same plate appears wherever that session does: rack row, session header, board card. Anything that needs the owner pushes a vermilion index tab out past the right edge of its slot, so the right edge of any list is the queue.\n\nThe world is quiet so the tab can be loud. Colour is functional, not decorative: green means the frame and live work, brass means identity, vermilion means \"you are needed\", and the greys carry everything else. State is never colour alone: working has a spinning open ring and a growing rule, idle a dashed ring, asleep a square, done an outlined `NEW` tab, needs-you a filled tab with a word (`PLAN`, `ASK`, `ALLOW?`). Guesses are hatched, never solid.\n\nDensity is phone-native and one-handed: a fixed 390-wide column, 16px gutters, 64px rows, 44px controls, and the tab bar in the thumb zone. Both themes are first-class; dark is a deeper enamel with a brighter vermilion, not an inversion.",
+    "keyCharacteristics": [
+      "Enamelled frame-green shell around a pale steel-grey ground.",
+      "Slot groups made of hairline rules and one soft shadow, never borders on every side.",
+      "Brass designator plates in Courier Prime, flat, identical everywhere.",
+      "The vermilion tab pushed past the slot's right edge, with a folded-under corner and a slide-out.",
+      "Working time drawn as rule length; stale time drawn hatched.",
+      "System UI for reading, Courier Prime for labels, JetBrains Mono for code and the terminal."
+    ],
+    "rules": [
+      {
+        "name": "The Quarantine Rule",
+        "body": "Vermilion means \"you are needed\" and nothing else. It appears on needs-you tabs, the tab-bar count, and the answer card with its answer button. If a red thing on screen cannot be answered or opened to answer, it should not be red. Errors and refusals are ink at weight 600.",
+        "section": "colors"
+      },
+      {
+        "name": "The Enamel Edge Rule",
+        "body": "Frame green belongs to the shell only. Content never sits on green and the ground never turns green; the frame encloses, the slots hold.",
+        "section": "colors"
+      },
+      {
+        "name": "The Brass Is Identity Rule",
+        "body": "Brass marks who something is (a designator, a pairing step, the pairing code), never what state it is in.",
+        "section": "colors"
+      },
+      {
+        "name": "The Three Voices Rule",
+        "body": "System UI reads, Courier Prime labels, JetBrains Mono quotes the machine. Courier Prime never sets a sentence; JetBrains Mono never sets UI chrome.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tabular Time Rule",
+        "body": "Every count and duration uses tabular figures so a ticking timer never jitters.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Shadow Rule",
+        "body": "A surface either sits on the ground with the slot shadow or it sits inside one with hairlines. Nothing floats over a slot except the tab.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do put the tab at the right edge, pushed 7px past the slot, with its fold and its 420ms slide-out, wherever a session needs the owner in a list.",
+      "Do keep the designator plate identical (brass, Courier Prime 700, 3px) in every place a session appears.",
+      "Do draw working time as rule length with the time label at the rule's end, and hatch it the moment it is stale.",
+      "Do give every state a shape or word as well as a colour.",
+      "Do hold every control at 44px (segments may be 38px only inside the 3px-padded track) and rows at 64px.",
+      "Do pad the shell with `env(safe-area-inset-top)` and the bottom bars with `max(…, env(safe-area-inset-bottom))`.",
+      "Do use one slot shadow per surface and hairline rules inside it.",
+      "Do define every colour for both themes and check AA in both, including muted text on the ground (ink-tertiary 4.77:1, working green 5.15:1 in light)."
+    ],
+    "donts": [
+      "Don't use vermilion for errors, refusals, warnings, destructive actions or decoration; it means \"answer me\". Errors are ink at weight 600.",
+      "Don't put a red count badge on a grey list; the tab is the badge.",
+      "Don't set sentences in Courier Prime or chrome in JetBrains Mono.",
+      "Don't give brass plates gradients, bevels or shadows.",
+      "Don't stack shadows or float anything over a slot except the tab.",
+      "Don't put content on frame green or turn the ground green.",
+      "Don't draw a stale or unknown state solid."
+    ]
+  }
+}

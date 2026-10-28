@@ -9,13 +9,14 @@
   --frame: #1f4a44;
   --frame-2: #2a5d56;
   --frame-ink: #eaf2ee;
-  --frame-ink-2: #b5cbc4;
+  --frame-ink-2: #c6d8d1;
+  --live: #7fd3b8; /* the link dot: always on the frame, which stays dark green in both themes */
   --ground: #e6eae4;
   --slot: #f7f8f4;
   --slot-2: #eef1ec;
   --ink: #161c1a;
   --ink-2: #4a5652;
-  --ink-3: #66726e;
+  --ink-3: #5c6864;
   --rule: #c9d1cb;
   --rule-strong: #9eaaa4;
   --brass: #c9a452;
@@ -23,8 +24,8 @@
   --tab: #c93a22;
   --tab-ink: #ffffff;
   --tab-wash: #fbe9e4;
-  --work: #2f7d6e;
-  --focus: #2f7d6e;
+  --work: #276b5e;
+  --focus: #276b5e;
   --term-bg: #12191a;
   --term-ink: #d7e2dc;
   --shadow: 0 6px 18px -8px rgb(22 28 26 / 0.35);
@@ -86,7 +87,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .screen.on.back { animation-name: slide-back; }
 @keyframes slide-in { from { transform: translateX(14px); opacity: .6; } }
 @keyframes slide-back { from { transform: translateX(-14px); opacity: .6; } }
-@media (prefers-reduced-motion: reduce) { .screen.on { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .screen.on, .state.working .dot { animation: none; } }
 
 /* ---- shell: the enamelled frame --------------------------------------------------------- */
 .topbar { background: var(--frame); color: var(--frame-ink); padding: calc(env(safe-area-inset-top) + 8px) 16px 12px; display: flex; align-items: center; gap: 10px; min-height: 52px; flex: none; }
@@ -95,7 +96,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .icon-btn { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 12px; color: inherit; margin: -6px; }
 .icon-btn:active { background: var(--frame-2); }
 .link-state { display: inline-flex; align-items: center; gap: 6px; font: 500 12px/1 var(--ui); color: var(--frame-ink-2); }
-.link-state i { width: 7px; height: 7px; border-radius: 50%; background: #7fd3b8; }
+.link-state i { width: 7px; height: 7px; border-radius: 50%; background: var(--live); }
 
 .tabbar { flex: none; display: flex; background: var(--frame); color: var(--frame-ink-2); padding: 6px 8px max(8px, env(safe-area-inset-bottom)); border-top: 1px solid rgb(0 0 0 / .15); }
 .tabbar button { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; font: 500 11px/1 var(--ui); padding: 6px 0; min-height: 48px; position: relative; }
@@ -152,9 +153,9 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .btn.quiet { background: var(--slot-2); color: var(--ink); box-shadow: inset 0 0 0 1px var(--rule); }
 .btn.block { width: 100%; }
 .seg { display: flex; background: var(--frame-2); border-radius: 10px; padding: 3px; gap: 2px; }
-.seg button { flex: 1; min-height: 32px; border-radius: 8px; font: 600 13px/1 var(--ui); color: var(--frame-ink-2); display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+.seg button { flex: 1; min-height: 38px; border-radius: 8px; font: 600 13px/1 var(--ui); color: var(--frame-ink-2); display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
 .seg button[aria-pressed='true'] { background: var(--frame-ink); color: var(--frame); }
-.chip { min-height: 36px; padding: 0 12px; border-radius: 18px; font: 500 14px/1 var(--ui); background: var(--slot); color: var(--ink); box-shadow: inset 0 0 0 1px var(--rule-strong); display: inline-flex; align-items: center; gap: 6px; }
+.chip { min-height: 44px; padding: 0 12px; border-radius: 18px; font: 500 14px/1 var(--ui); background: var(--slot); color: var(--ink); box-shadow: inset 0 0 0 1px var(--rule-strong); display: inline-flex; align-items: center; gap: 6px; }
 .chip[aria-pressed='true'] { background: var(--ink); color: var(--slot); box-shadow: none; }
 
 /* ---- chat ------------------------------------------------------------------------------- */
@@ -197,7 +198,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .term .g { color: #7fd3b8; } .term .y { color: #e8c46a; } .term .r { color: #ff8a73; } .term .b { color: #8db7ff; } .term .d { color: #74857f; } .term .w { color: #fff; font-weight: 600; }
 .term .cur { background: #d7e2dc; color: #0a0f0f; }
 .keys { flex: none; display: flex; gap: 6px; padding: 8px 10px max(10px, env(safe-area-inset-bottom)); background: #0d1414; overflow-x: auto; }
-.keys button { min-width: 44px; height: 40px; padding: 0 10px; border-radius: 8px; background: #1f2b2a; color: #d7e2dc; font: 600 13px/1 var(--ui); flex: none; display: grid; place-items: center; }
+.keys button { min-width: 44px; height: 44px; padding: 0 10px; border-radius: 8px; background: #1f2b2a; color: #d7e2dc; font: 600 13px/1 var(--ui); flex: none; display: grid; place-items: center; }
 .keys button.on { background: #d7e2dc; color: #0a0f0f; }
 
 /* ---- board ------------------------------------------------------------------------------ */
@@ -233,7 +234,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   linear-gradient(#7fd3b8, #7fd3b8) bottom right / 28px 3px no-repeat, linear-gradient(#7fd3b8, #7fd3b8) bottom right / 3px 28px no-repeat; }
 .mac-card { background: var(--slot); border-radius: 14px; box-shadow: var(--shadow); padding: 14px; display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; align-items: center; }
 .mac-card .k { grid-column: 2; font: 400 12px/1.4 var(--code); color: var(--ink-2); }
-.sas { font: 700 38px/1 var(--code); letter-spacing: .02em; text-align: center; padding: 22px 8px; background: var(--slot); border-radius: 16px; box-shadow: var(--shadow), inset 0 0 0 1.5px var(--brass); }
+.sas { font: 600 38px/1 var(--code); letter-spacing: .02em; text-align: center; padding: 22px 8px; background: var(--slot); border-radius: 16px; box-shadow: var(--shadow), inset 0 0 0 1.5px var(--brass); }
 .sas span { color: var(--ink-3); }
 .hint { font-size: 13px; color: var(--ink-2); text-align: center; line-height: 1.45; }
 .waiting { display: flex; align-items: center; justify-content: center; gap: 10px; font: 500 14px/1 var(--ui); color: var(--work); }
