@@ -34,6 +34,23 @@ export function Markdown({ text }: { text: string }) {
       blocks.push(<pre class="md-code">{body.join('\n')}</pre>)
       continue
     }
+    // A GFM table: a pipe row followed by a |---| separator row.
+    if (/^\s*\|.*\|\s*$/.test(line) && /^\s*\|[\s:|-]+\|\s*$/.test(lines[i + 1] ?? '')) {
+      const cells = (l: string) => l.trim().replace(/^\||\|$/g, '').split('|').map((c) => c.trim())
+      const head = cells(line)
+      const rows: string[][] = []
+      i += 2
+      while (i < lines.length && /^\s*\|.*\|\s*$/.test(lines[i]!)) rows.push(cells(lines[i++]!))
+      blocks.push(
+        <div class="md-table">
+          <table>
+            <thead><tr>{head.map((c) => <th>{inline(c)}</th>)}</tr></thead>
+            <tbody>{rows.map((r) => <tr>{r.map((c) => <td>{inline(c)}</td>)}</tr>)}</tbody>
+          </table>
+        </div>
+      )
+      continue
+    }
     const h = /^(#{1,4})\s+(.*)$/.exec(line)
     if (h) {
       blocks.push(<p class={`md-h md-h${h[1]!.length}`}>{inline(h[2]!)}</p>)
@@ -55,7 +72,7 @@ export function Markdown({ text }: { text: string }) {
       continue
     }
     const para: string[] = []
-    while (i < lines.length && lines[i]!.trim() && !/^(```|#{1,4}\s|\s*([-*]|\d+\.)\s)/.test(lines[i]!)) para.push(lines[i++]!)
+    while (i < lines.length && lines[i]!.trim() && !/^(```|#{1,4}\s|\s*([-*]|\d+\.)\s|\s*\|)/.test(lines[i]!)) para.push(lines[i++]!)
     blocks.push(<p>{inline(para.join(' '))}</p>)
   }
   return <>{blocks}</>

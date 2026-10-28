@@ -90,6 +90,18 @@ is ready.)
 Removing any phone in nodeterm's Phone settings removes Ferry too, because nodeterm revokes all phone
 pins at once.
 
+## Verified against a real Mac (2026-10-28)
+
+Paired a phone-sized Chrome against the owner's nodeterm (dev build with `NODETERM_RELAY_URL`) through
+the dev server's proxy. The SAS matched the desktop dialog, approval pinned the key, and later loads
+reconnected without asking (about 6 s from load to live). The rack listed the real sessions and
+states; a chat transcript rendered (tables included); a terminal attached and detached. Nothing was
+typed or answered.
+
+Known limitation: tmux keeps a window at the size of its most recently active client, so while the Mac
+is the active client a phone attach does not resize your pane, and lines wider than the phone are clipped
+at the right edge. That is the deliberate trade-off: the phone never reflows your desktop terminal.
+
 ## Notifications
 
 There are none while the app is closed, yet. nodeterm pushes only to the official app through APNs.
